@@ -1,0 +1,50 @@
+.dialogs {
+  display: grid;
+  grid-template-columns: 2fr 10fr;
+}
+
+.dialogs__item {
+  padding: 10px;
+}
+.dialog {
+  display: grid;
+  grid-template-columns: 6fr 6fr;
+  position: relative;
+  margin-bottom: 20px;
+  grid-template-areas: 'i d';
+}
+.dialog a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.1s linear;
+  position: absolute;
+  transform: translateY(-50%);
+  top: 50%;
+}
+.dialog__name {
+  grid-area: d;
+}
+.dialog img {
+  width: 60px;
+  grid-area: i;
+}
+
+.dialog a:hover {
+  color: gold;
+}
+
+.dialog .activeLink {
+  color: gold;
+}
+
+.messages {
+  padding: 10px;
+}
+
+.message {
+  color: #fff;
+}
+.post {
+	margin-top: 20px;
+
+}

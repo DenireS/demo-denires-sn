@@ -1,0 +1,19 @@
+.nav {
+  grid-area: n;
+	background-color: darkred;
+	padding: 20px;
+}
+
+.item a {
+	color: #fff;
+	text-decoration: none;
+	transition: color .1s linear;
+}
+
+.item a:hover {
+	color: gold;
+}
+
+.item a.activeLink {
+	color: gold;
+}

@@ -1,0 +1,13 @@
+.pages {
+  font-size: 25px;
+  color: #fff;
+}
+
+.selectedPage {
+  font-weight: bold;
+  color: gold;
+}
+
+.notSelectedPage {
+
+}

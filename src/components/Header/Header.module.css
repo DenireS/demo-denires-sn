@@ -1,0 +1,22 @@
+.header {
+  position: relative;
+  grid-area: h;
+  background-color: green;
+}
+
+.header img {
+  position: absolute;
+  top: 50%;
+  margin-left: 1rem;
+  transform: translateY(-50%);
+  width: 4rem;
+}
+
+.loginBlock {
+  position: absolute;
+  right: 0;
+}
+.loginBlock a {
+  color: #fff;
+  cursor: pointer;
+}
