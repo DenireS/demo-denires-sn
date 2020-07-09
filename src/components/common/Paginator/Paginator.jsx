@@ -3,7 +3,7 @@ import styles from './Paginator.module.css';
 import classNames from 'classnames'
 
 
-let Paginator = ({totalItemsCount, pageSize, currentPage, onPageChanged, portionSize=10}) => {
+let Paginator = ({totalItemsCount, pageSize, currentPage, onPageChanged, portionSize}) => {
 
     let pagesCount = Math.ceil(totalItemsCount / pageSize);
     let pages = [];
@@ -16,17 +16,18 @@ let Paginator = ({totalItemsCount, pageSize, currentPage, onPageChanged, portion
     let leftPortionPageNumber = (portionNumber - 1) * portionSize + 1;
     let rightPortionPageNumber = portionNumber * portionSize
 
-
     return (
         <div className={styles.paginator}>
             {portionNumber > 1 &&
-            <button onClick={() => {setPortionNumber(portionNumber -1)}}>Prev page</button>}
+            <button onClick={() => {
+                setPortionNumber(portionNumber - 1)
+            }}>Prev page</button>}
 
             {pages
                 .filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
                 .map((p) => (
                     <span
-                        className={classNames(styles.pages, (currentPage === p ? styles.selectedPage : styles.notSelectedPage))}
+                        className={classNames(styles.pages, {[styles.selectedPage]: currentPage === p})}
                         key={p}
                         onClick={(e) => {
                             onPageChanged(p);
@@ -35,7 +36,9 @@ let Paginator = ({totalItemsCount, pageSize, currentPage, onPageChanged, portion
             }
 
             {portionNumber < portionCount &&
-            <button onClick={() => {setPortionNumber(portionNumber + 1)}}>Next page</button>}
+            <button onClick={() => {
+                setPortionNumber(portionNumber + 1)
+            }}>Next page</button>}
         </div>
     );
 };

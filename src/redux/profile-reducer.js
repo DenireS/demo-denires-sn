@@ -119,11 +119,16 @@ export const getStatus = (userId) => async (dispatch) => {
 };
 
 export const updateStatus = (status) => async (dispatch) => {
-    let response = await ProfileAPI.updateStatus(status)
+    try {
+        let response = await ProfileAPI.updateStatus(status)
 
-    if (response.data.resultCode === 0) {
-        dispatch(setStatus(status));
+        if (response.data.resultCode === 0) {
+            dispatch(setStatus(status));
+        }
+    } catch (error) {
+        alert(error)
     }
+
 
 };
 export const savePhoto = (file) => async (dispatch) => {
