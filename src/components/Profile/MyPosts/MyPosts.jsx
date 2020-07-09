@@ -9,7 +9,6 @@ import {
 import { FormType } from '../../../hoc/FormsControls';
 
 const MyPosts = (props) => {
-  console.log('render');
   let postsElements = [...props.posts]
     .reverse()
     .map((p) => (

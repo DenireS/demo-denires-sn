@@ -35,16 +35,30 @@ export const ProfileAPI = {
     updateStatus(status) {
         return instanse.put(`profile/status`, {status: status});
     },
+    savePhoto(photoFIle) {
+        const formData = new FormData();
+        formData.append('image', photoFIle)
+        return instanse.put(`profile/photo`, formData)
+    },
+    saveProfile(profile) {
+        return instanse.put(`profile`, profile);
+    }
 };
 
 export const AuthAPI = {
     me() {
         return instanse.get(`auth/me`);
     },
-    login(email, password, rememberMe = false) {
-        return instanse.post(`auth/login`, {email, password, rememberMe});
+    login(email, password, rememberMe = false, captcha = null) {
+        return instanse.post(`auth/login`, {email, password, rememberMe, captcha});
     },
     logout() {
         return instanse.delete(`auth/login`);
     },
 };
+
+export const SecurityAPI = {
+    captcha() {
+        return instanse.get(`security/get-captcha-url`)
+    }
+}
