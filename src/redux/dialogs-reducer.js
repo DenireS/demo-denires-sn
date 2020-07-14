@@ -1,77 +1,109 @@
+import {DialogsAPI} from "../api/api";
+
 const SEND_MESSAGE = 'SEND_MESSAGE';
+const SET_DIALOG_USER_DATA = 'SET_DIALOG_USER_DATA'
+const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
+const SET_DIALOG_USER_MESSAGES = 'SET_DIALOG_USER_MESSAGES'
+const SET_CURRENT_CHAT = 'SET_CURRENT_CHAT'
 
 let initialState = {
-  dialogs: [
-    {
-      id: 1,
-      name: 'Sasha',
-      img:
-        'https://i.pinimg.com/736x/14/79/9d/14799d9779f9b44d7116783ce7121d5f.jpg',
-    },
-    {
-      id: 2,
-      name: 'Sanyok',
-      img:
-        'https://i.pinimg.com/736x/14/79/9d/14799d9779f9b44d7116783ce7121d5f.jpg',
-    },
-    {
-      id: 3,
-      name: 'Aleksandr',
-      img:
-        'https://i.pinimg.com/736x/14/79/9d/14799d9779f9b44d7116783ce7121d5f.jpg',
-    },
-    {
-      id: 4,
-      name: 'Shurik',
-      img:
-        'https://i.pinimg.com/736x/14/79/9d/14799d9779f9b44d7116783ce7121d5f.jpg',
-    },
-    {
-      id: 5,
-      name: 'Shura',
-      img:
-        'https://i.pinimg.com/736x/14/79/9d/14799d9779f9b44d7116783ce7121d5f.jpg',
-    },
-    {
-      id: 6,
-      name: 'Sancho',
-      img:
-        'https://i.pinimg.com/736x/14/79/9d/14799d9779f9b44d7116783ce7121d5f.jpg',
-    },
-    {
-      id: 7,
-      name: 'Sashunya',
-      img:
-        'https://i.pinimg.com/736x/14/79/9d/14799d9779f9b44d7116783ce7121d5f.jpg',
-    },
-  ],
-  messages: [
-    { id: 1, message: 'Yo' },
-    { id: 2, message: 'How are you' },
-    { id: 3, message: 'Hi' },
-    { id: 4, message: 'Yo' },
-    { id: 5, message: 'Yo' },
-  ],
+    currentChat: null,
+    isFetching: false,
+    users: [
+        {id: null, photo: null, userName: null},
+    ],
+    messages: [],
 };
 
 export const dialogsReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case SEND_MESSAGE:
-      let body = action.newMessageBody;
-      return {
-        ...state,
-        messages: [...state.messages, { id: 6, message: body }],
-      };
+    switch (action.type) {
+        case SEND_MESSAGE:
+            let body = action.newMessageBody;
+            return {
+                ...state,
+                messages: [...state.messages, {id: 6, message: body}],
+            };
+        case TOGGLE_IS_FETCHING: {
+            return {
+                ...state,
+                isFetching: action.isFetching
+            }
+        }
+        case SET_CURRENT_CHAT: {
+            return {
+                ...state,
+                currentChat: action.id
+            }
+        }
+        case SET_DIALOG_USER_DATA: {
+            return {
+                ...state,
+                users: [action.payload]
+            }
+        }
+        case SET_DIALOG_USER_MESSAGES: {
+            return {
+                ...state,
+                messages: action.items.reverse()
+            }
+        }
 
-    default:
-      return state;
-  }
+        default:
+            return state;
+    }
 };
 
-export const sendMessageCreator = (newMessageBody) => ({
-  type: SEND_MESSAGE,
-  newMessageBody,
+
+export const setDialogUserData = (id, photo, userName) => ({
+    type: SET_DIALOG_USER_DATA,
+    payload: {
+        id,
+        photo,
+        userName,
+    },
 });
+export const setDialogUserMessages = (items) => ({
+    type: SET_DIALOG_USER_MESSAGES,
+    items
+});
+
+export const dialogsIsFetching = (isFetching) => ({
+    type: TOGGLE_IS_FETCHING,
+    isFetching,
+});
+export const setCurrentChat = (id) => ({
+    type: SET_CURRENT_CHAT,
+    id,
+});
+
+export const sendMessage = (id, body) =>
+    async (dispatch) => {
+        let response = await DialogsAPI.sendMessage(id, body)
+        dispatch(requestMessages(id))
+    }
+
+
+export const startChatting = (id) =>
+    async (dispatch) => {
+        let response = await DialogsAPI.getChatting(id)
+    }
+
+export const requestMessages = (id) =>
+    async (dispatch) => {
+        let response = await DialogsAPI.getMessages(id)
+        dispatch(setDialogUserMessages(response.data.items))
+    }
+
+export const requestDialogs = () =>
+    async (dispatch) => {
+        dispatch(dialogsIsFetching(true))
+        let respone = await DialogsAPI.getDialogs();
+        respone.data.map(m => {
+            dispatch(setDialogUserData(m.id, m.photos.small, m.userName,))
+        })
+        dispatch(dialogsIsFetching(false))
+
+    }
 
 
 export default dialogsReducer;

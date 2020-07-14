@@ -62,3 +62,18 @@ export const SecurityAPI = {
         return instanse.get(`security/get-captcha-url`)
     }
 }
+export const DialogsAPI = {
+    getDialogs() {
+        return instanse.get(`dialogs`)
+    },
+    getChatting(id) {
+        return instanse.put('dialogs/' + id)
+    },
+    getMessages(id) {
+        return instanse.get(`dialogs/${id}/messages`)
+    },
+    sendMessage(id, body) {
+        return instanse.post(`dialogs/${id}/messages`, {body:body})
+    }
+
+}

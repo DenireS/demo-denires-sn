@@ -17,14 +17,13 @@ import Preloader from './components/common/Preloader/Preloader';
 import store from "./redux/redux-store";
 import {withSuspense} from "./hoc/withSuspense";
 
-
 //import DialogsContainer from './components/Dialogs/DialogsContainer';
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 
 
 class App extends React.Component {
 
-    catchAllUnhandledErrors = (promiseRejectionEvent)=> {
+    catchAllUnhandledErrors = (promiseRejectionEvent) => {
         alert('Some errors')
         console.log(promiseRejectionEvent)
     }
@@ -50,7 +49,7 @@ class App extends React.Component {
                 <div className="app-wrapper__content">
                     <Switch>
                         <Redirect exact from="/" to="/profile"/>
-                        <Route path="/dialogs" render={withSuspense(DialogsContainer)}/>
+                        <Route path="/dialogs/:userId?" render={withSuspense(DialogsContainer)}/>
                         <Route path="/profile/:userId?" render={() => <ProfileContainer/>}/>
                         <Route path="/users" render={() => <UsersContainer/>}/>
                         <Route path="/news" render={() => <News/>}/>
