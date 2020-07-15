@@ -1,10 +1,19 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styles from './users.module.css';
 import userPhoto from '../../assets/images/User.jpg';
 import {NavLink} from 'react-router-dom';
+import {FormType} from "../../hoc/FormsControls";
+import {maxLengthCreator, required} from "../../utils/validators/validators";
+import {Field, reduxForm} from "redux-form";
 
 
-let User = ({user, followingInProgress, unfollow, follow}) => {
+let User = ({user, followingInProgress, unfollow, follow, setFormControl,setReceiver}) => {
+
+    let openForm = (id) => {
+        setFormControl(true)
+        setReceiver(id)
+    }
+
     return (
         <div>
           <span>
@@ -44,10 +53,10 @@ let User = ({user, followingInProgress, unfollow, follow}) => {
               <div>{user.status}</div>
             </span>
             <span>
-              <div>{'user.location.country'}</div>
-              <div>{'user.location.city'}</div>
+              <span onClick={() => openForm(user.id)}>{'Write your message'}</span>
             </span>
           </span>
+
         </div>
     )
 }

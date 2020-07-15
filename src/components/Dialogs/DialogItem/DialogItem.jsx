@@ -6,13 +6,12 @@ import {NavLink} from 'react-router-dom';
 function DialogItem(props) {
     let selectDialog = () => {
         props.setCurrentChat(props.id)
-        // props.startChatting(props.id)
     }
 
     return (
         <div className={s.dialog}>
             <img src={props.img}></img>
-            <div className={s.dialog__name} onClick={selectDialog}>
+            <div className={s.dialog__name} onClick={() => selectDialog}>
                 <NavLink to={'/dialogs/' + props.id} activeClassName={s.activeLink}>
                     {props.name}
                 </NavLink>

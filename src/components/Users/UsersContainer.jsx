@@ -17,6 +17,7 @@ import {
     getIsFetching,
     getFollowingInProgress, getPortionSize, getTotalItemsCount,
 } from '../../redux/users-selectors';
+import {sendUserMessage} from "../../redux/dialogs-reducer";
 
 class UsersContainer extends React.Component {
     componentDidMount() {
@@ -44,6 +45,7 @@ class UsersContainer extends React.Component {
                     toggleFollowingProgress={this.props.toggleFollowingProgress}
                     followingInProgress={this.props.followingInProgress}
                     portionSize={this.props.portionSize}
+                    sendUserMessage={this.props.sendUserMessage}
                 />
             </>
         );
@@ -69,5 +71,6 @@ export default compose(
         setCurrentPage,
         toggleFollowingProgress,
         requestUsers,
+        sendUserMessage,
     })
 )(UsersContainer);

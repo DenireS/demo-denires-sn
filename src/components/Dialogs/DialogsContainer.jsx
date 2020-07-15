@@ -1,5 +1,12 @@
 import React from 'react';
-import {requestDialogs, requestMessages, sendMessage, setCurrentChat, startChatting} from '../../redux/dialogs-reducer';
+import {
+    requestCurrentChatInfo,
+    requestDialogs,
+    requestMessages,
+    sendMessage,
+    setCurrentChat,
+    startChatting
+} from '../../redux/dialogs-reducer';
 import Dialogs from './Dialogs';
 import {connect} from 'react-redux';
 import {Redirect, Route, withRouter} from 'react-router-dom';
@@ -51,6 +58,7 @@ let mapStateToProps = (state) => {
         messages: state.dialogsPage.messages,
         isFetching: state.dialogsPage.isFetching,
         currentChat: state.dialogsPage.currentChat,
+        profile: state.dialogsPage.profile,
     };
 };
 
