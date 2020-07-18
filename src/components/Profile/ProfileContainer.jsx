@@ -11,6 +11,7 @@ import Profile from './Profile';
 import {connect} from 'react-redux';
 import {withRouter, Redirect} from 'react-router-dom';
 import {compose} from 'redux';
+import {sendUserMessage} from "../../redux/dialogs-reducer";
 
 class ProfileContainer extends React.Component {
 
@@ -64,6 +65,7 @@ export default compose(
         saveProfile,
         setProfileEditStatus,
         editIsFetching,
+        sendUserMessage,
     }),
     withRouter
     // withAuthRedirect

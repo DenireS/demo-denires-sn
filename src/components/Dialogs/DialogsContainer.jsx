@@ -1,8 +1,9 @@
 import React from 'react';
 import {
+    deleteMessage,
     requestCurrentChatInfo,
     requestDialogs,
-    requestMessages,
+    requestMessages, requestOldMessages, restoreMessage,
     sendMessage,
     setCurrentChat,
     startChatting
@@ -59,12 +60,16 @@ let mapStateToProps = (state) => {
         isFetching: state.dialogsPage.isFetching,
         currentChat: state.dialogsPage.currentChat,
         profile: state.dialogsPage.profile,
+        userId: state.auth.userId,
     };
 };
 
 
 export default compose(
-    connect(mapStateToProps, {sendMessage, requestDialogs, startChatting, setCurrentChat, requestMessages}),
+    connect(mapStateToProps, {
+        sendMessage, requestDialogs, startChatting, setCurrentChat,
+        requestMessages, deleteMessage, restoreMessage, requestOldMessages
+    }),
     withAuthRedirect,
     withRouter
 )(DialogsContainer);

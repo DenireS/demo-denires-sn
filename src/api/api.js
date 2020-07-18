@@ -72,8 +72,17 @@ export const DialogsAPI = {
     getMessages(id) {
         return instanse.get(`dialogs/${id}/messages`)
     },
+    getOldMessages(id,date) {
+        return instanse.get(`dialogs/${id}/messages/new?newerThen=${date}`)
+    },
     sendMessage(id, body) {
-        return instanse.post(`dialogs/${id}/messages`, {body:body})
+        return instanse.post(`dialogs/${id}/messages`, {body: body})
+    },
+    deleteMessage(messageId) {
+        return instanse.delete(`dialogs/messages/${messageId}`)
+    },
+    restoreMessage(messageId) {
+        return instanse.put(`dialogs/messages/${messageId}/restore`)
     }
 
 }

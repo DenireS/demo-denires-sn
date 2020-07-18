@@ -7,11 +7,13 @@ import {maxLengthCreator, required} from "../../utils/validators/validators";
 import {Field, reduxForm} from "redux-form";
 
 
-let User = ({user, followingInProgress, unfollow, follow, setFormControl,setReceiver}) => {
+let User = ({user, followingInProgress, unfollow, follow, setFormControl, setReceiverId, setReceiver, setPhoto}) => {
 
-    let openForm = (id) => {
+    let openForm = (id, photo,name) => {
         setFormControl(true)
-        setReceiver(id)
+        setReceiver(name)
+        setReceiverId(id)
+        setPhoto(photo)
     }
 
     return (
@@ -53,7 +55,7 @@ let User = ({user, followingInProgress, unfollow, follow, setFormControl,setRece
               <div>{user.status}</div>
             </span>
             <span>
-              <span onClick={() => openForm(user.id)}>{'Write your message'}</span>
+              <span onClick={() => openForm(user.id, user.photos.small, user.name)}>{'Write your message'}</span>
             </span>
           </span>
 

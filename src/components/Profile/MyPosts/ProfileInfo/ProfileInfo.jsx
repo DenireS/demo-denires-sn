@@ -4,12 +4,21 @@ import Preloader from '../../../common/Preloader/Preloader';
 import ProfileStatusWithHooks from './ProfileStatusWithHooks';
 import userPhoto from '../../../../assets/images/User.jpg';
 import ProfileDataForm from "./ProfileDataForm";
+import AddMessageUserFormRedux from "../../../common/MessageForm/UsersMessageForm";
 
 function ProfileInfo({
                          profile, status, updateStatus, isOwner, savePhoto, saveProfile,
                          profileEditStatus, setProfileEditStatus, editIsFetching, isFetching,
+                         sendUserMessage
                      }) {
 
+    let [formControl, setFormControl] = useState(false)
+    let [receiverId, setReceiverId] = useState(null)
+
+    let openForm = (id) => {
+        setFormControl(true)
+        setReceiverId(id)
+    }
 
     const onSubmit = (formDate) => {
         editIsFetching(true)
@@ -26,12 +35,24 @@ function ProfileInfo({
             savePhoto(e.target.files[0]);
         }
     }
+
+
+    let addNewMessage = (values) => {
+        sendUserMessage(receiverId, values.newMessageBody);
+        values.newMessageBody = null;
+    };
     return (
         <div>
             <div className={s.description}>
                 <img src={profile.photos.large || userPhoto} className={s.mainPhoto}/>
                 {isOwner && <input type={'file'} onChange={onMainPhotoSelected}/>}
-
+                {!isOwner && <div onClick={() => openForm(profile.userId)}>Write message</div>}
+                {formControl
+                    ? <AddMessageUserFormRedux onSubmit={addNewMessage} userId={profile.userId}
+                                               receiver={profile.fullName}
+                                               photo={profile.photos.small} setFormControl={setFormControl}
+                                               receiverId={receiverId}/>
+                    : null}
                 {profileEditStatus
                     ? <ProfileDataForm initialValues={profile} profile={profile} onSubmit={onSubmit}
                                        isFetching={isFetching}/>

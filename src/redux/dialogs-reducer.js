@@ -107,7 +107,10 @@ export const requestMessages = (id) =>
         dispatch(setDialogUserMessages(response.data.items))
         let response2 = await ProfileAPI.getProfile(id)
         dispatch(setCurrentChatInfo(response2.data))
-
+    }
+export const requestOldMessages = (id, date) =>
+    async (dispatch) => {
+        let response = await DialogsAPI.getOldMessages(id, date)
     }
 
 export const requestDialogs = () =>
@@ -116,7 +119,16 @@ export const requestDialogs = () =>
         let respone = await DialogsAPI.getDialogs();
         dispatch(setDialogUserData(respone.data))
         dispatch(dialogsIsFetching(false))
+    }
 
+export const deleteMessage = (messageId, recipientId) =>
+    async (dispatch) => {
+        let respone = await DialogsAPI.deleteMessage(messageId);
+
+    }
+export const restoreMessage = (messageId) =>
+    async (dispatch) => {
+        let respone = await DialogsAPI.restoreMessage(messageId);
     }
 
 
