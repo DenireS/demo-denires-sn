@@ -5,7 +5,7 @@ import {
     requestDialogs,
     requestMessages, requestOldMessages, restoreMessage,
     sendMessage,
-    setCurrentChat,
+    setCurrentChat, setlastDate, SetPortionSize,
     startChatting
 } from '../../redux/dialogs-reducer';
 import Dialogs from './Dialogs';
@@ -46,7 +46,8 @@ class DialogsContainer extends React.PureComponent {
         return (
             <>
                 {this.props.isFetching ? <Preloader/> : null}
-                {this.props.match.params.userId ? <DialogChat {...this.props} /> : <Dialogs {...this.props} />}
+                {this.props.match.params.userId && !this.props.isFetching ? <DialogChat {...this.props} /> :
+                    <Dialogs {...this.props} />}
             </>
         )
     }
@@ -61,6 +62,8 @@ let mapStateToProps = (state) => {
         currentChat: state.dialogsPage.currentChat,
         profile: state.dialogsPage.profile,
         userId: state.auth.userId,
+        lastDate: state.dialogsPage.lastDate,
+        portionSize: state.dialogsPage.portionSize
     };
 };
 
@@ -68,7 +71,7 @@ let mapStateToProps = (state) => {
 export default compose(
     connect(mapStateToProps, {
         sendMessage, requestDialogs, startChatting, setCurrentChat,
-        requestMessages, deleteMessage, restoreMessage, requestOldMessages
+        requestMessages, deleteMessage, restoreMessage, requestOldMessages, setlastDate,
     }),
     withAuthRedirect,
     withRouter

@@ -6,9 +6,13 @@ const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 const SET_DIALOG_USER_MESSAGES = 'SET_DIALOG_USER_MESSAGES'
 const SET_CURRENT_CHAT = 'SET_CURRENT_CHAT'
 const SET_CURRENT_CHAT_INFO = 'SET_CURRENT_CHAT_INFO'
+const SET_OLD_DIALOG_USER_MESSAGES = 'SET_OLD_DIALOG_USER_MESSAGES'
+const SET_LAST_DATE = 'SET_LAST_DATE'
 
 
 let initialState = {
+    lastDate: '2018-06-19',
+    portionSize: 10,
     currentChat: null,
     isFetching: false,
     profile: null,
@@ -48,10 +52,26 @@ export const dialogsReducer = (state = initialState, action) => {
                 messages: action.items.reverse()
             }
         }
+        case SET_OLD_DIALOG_USER_MESSAGES: {
+
+            return {
+                ...state,
+                // messages: state.messages.concat(action.items.reverse())
+                messages: state.messages.concat(action.items).filter(function (el) {
+                    return state.messages.indexOf(el) === -1;
+                }).reverse()
+            }
+        }
         case SET_CURRENT_CHAT_INFO: {
             return {
                 ...state,
                 profile: action.profile,
+            };
+        }
+        case SET_LAST_DATE: {
+            return {
+                ...state,
+                lastDate: action.date,
             };
         }
 
@@ -65,8 +85,16 @@ export const setDialogUserData = (dialogs) => ({
     type: SET_DIALOG_USER_DATA,
     dialogs
 });
+export const setlastDate = (date) => ({
+    type: SET_LAST_DATE,
+    date
+});
 export const setDialogUserMessages = (items) => ({
     type: SET_DIALOG_USER_MESSAGES,
+    items
+});
+export const setOldDialogUserMessages = (items) => ({
+    type: SET_OLD_DIALOG_USER_MESSAGES,
     items
 });
 
@@ -89,6 +117,7 @@ export const sendMessage = (id, body) =>
         let response = await DialogsAPI.sendMessage(id, body)
         dispatch(requestMessages(id))
     }
+
 export const sendUserMessage = (id, body) =>
     async (dispatch) => {
         let response = await DialogsAPI.sendMessage(id, body)
@@ -110,7 +139,9 @@ export const requestMessages = (id) =>
     }
 export const requestOldMessages = (id, date) =>
     async (dispatch) => {
+
         let response = await DialogsAPI.getOldMessages(id, date)
+        dispatch(setOldDialogUserMessages(response.data))
     }
 
 export const requestDialogs = () =>

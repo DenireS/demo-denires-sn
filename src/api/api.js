@@ -72,7 +72,7 @@ export const DialogsAPI = {
     getMessages(id) {
         return instanse.get(`dialogs/${id}/messages`)
     },
-    getOldMessages(id,date) {
+    getOldMessages(id, date) {
         return instanse.get(`dialogs/${id}/messages/new?newerThen=${date}`)
     },
     sendMessage(id, body) {

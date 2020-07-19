@@ -1,50 +1,54 @@
 .dialogs {
-  display: grid;
-  grid-template-columns: 5fr 7fr;
+    display: grid;
+    grid-template-columns: 5fr 7fr;
 }
 
 .dialogs__item {
-  padding: 10px;
+    padding: 10px;
 }
+
 .dialog {
-  display: grid;
-  grid-template-columns: 6fr 6fr;
-  position: relative;
-  margin-bottom: 20px;
-  grid-template-areas: 'i d';
+    display: grid;
+    grid-template-columns: 6fr 6fr;
+    position: relative;
+    margin-bottom: 20px;
+    grid-template-areas: 'i d';
 }
+
 .dialog a {
-  color: #fff;
-  text-decoration: none;
-  transition: color 0.1s linear;
-  position: absolute;
-  transform: translateY(-50%);
-  top: 50%;
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.1s linear;
+    position: absolute;
+    transform: translateY(-50%);
+    top: 50%;
 }
+
 .dialog__name {
-  grid-area: d;
+    grid-area: d;
 }
+
 .dialog img {
-  width: 60px;
-  grid-area: i;
+    width: 60px;
+    grid-area: i;
 }
 
 .dialog a:hover {
-  color: gold;
+    color: gold;
 }
 
 .dialog .activeLink {
-  color: gold;
+    color: gold;
 }
 
 .messages {
-  padding: 10px;
+    padding: 10px;
 }
 
 .message {
-  color: #fff;
+    color: #fff;
 }
-.post {
-	margin-top: 20px;
 
+.post {
+    margin-top: 20px;
 }

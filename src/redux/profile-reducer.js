@@ -1,5 +1,6 @@
-import {UsersAPI, ProfileAPI} from '../api/api';
+import {UsersAPI, ProfileAPI, DialogsAPI} from '../api/api';
 import {stopSubmit} from "redux-form";
+import {setCurrentChatInfo, setDialogUserMessages} from "./dialogs-reducer";
 
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
@@ -22,17 +23,6 @@ let initialState = {
 
 const profileReducer = (state = initialState, action) => {
     switch (action.type) {
-        case ADD_POST: {
-            let newPost = {
-                id: 5,
-                message: action.newPostText,
-                likesCount: 0,
-            };
-            return {
-                ...state,
-                posts: [...state.posts, newPost],
-            };
-        }
         case SET_STATUS: {
             return {
                 ...state,
@@ -72,15 +62,10 @@ const profileReducer = (state = initialState, action) => {
     }
 };
 
-export const addPostCreator = (newPostText) => ({
-    type: ADD_POST,
-    newPostText,
-});
 export const setUserProfile = (profile) => ({
     type: SET_USER_PROFILE,
     profile,
 });
-
 export const setStatus = (status) => ({
     type: SET_STATUS,
     status,
@@ -109,8 +94,6 @@ export const getUserProfile = (userId) => async (dispatch) => {
     dispatch(setUserProfile(response.data));
 
 };
-
-
 export const getStatus = (userId) => async (dispatch) => {
     let response = await ProfileAPI.getStatus(userId)
 
