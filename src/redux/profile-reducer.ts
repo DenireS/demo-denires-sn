@@ -1,27 +1,23 @@
-import {UsersAPI, ProfileAPI, DialogsAPI} from '../api/api';
+import {UsersAPI, ProfileAPI} from '../api/api';
 import {stopSubmit} from "redux-form";
-import {setCurrentChatInfo, setDialogUserMessages} from "./dialogs-reducer";
+import {PhotosType, ProfileType} from "../types/types";
 
-const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
-const DELETE_POST = 'DELETE_POST';
 const SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS';
 const PROFILE_EDIT_STATUS = 'PROFILE_EDIT_STATUS';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 
 let initialState = {
-    posts: [
-        {id: 1, message: 'Hi, how are you?', likesCount: 11},
-        {id: 2, message: 'It`s my first post', likesCount: 23},
-    ],
-    profile: null,
+    profile: null as ProfileType | null,
     profileEditStatus: false,
     isFetching: false,
     status: '',
 };
 
-const profileReducer = (state = initialState, action) => {
+export type InitialStateType = typeof initialState
+
+const profileReducer = (state = initialState, action: any): InitialStateType => {
     switch (action.type) {
         case SET_STATUS: {
             return {
@@ -35,16 +31,10 @@ const profileReducer = (state = initialState, action) => {
                 profile: action.profile,
             };
         }
-        case DELETE_POST: {
-            return {
-                ...state,
-                posts: state.posts.filter((p) => p.id !== action.postId),
-            };
-        }
         case SAVE_PHOTO_SUCCESS: {
             return {
                 ...state,
-                profile: {...state.profile, photos: action.photos},
+                profile: {...state.profile, photos: action.photos} as ProfileType,
             };
         }
         case PROFILE_EDIT_STATUS: {
@@ -54,54 +44,80 @@ const profileReducer = (state = initialState, action) => {
             };
         }
         case TOGGLE_IS_FETCHING: {
-            return {...state,
-                isFetching: action.isFetching};
+            return {
+                ...state,
+                isFetching: action.isFetching
+            };
         }
         default:
             return state;
     }
 };
+type SetUserProfileActionType = {
+    type: typeof SET_USER_PROFILE,
+    profile: ProfileType,
+}
 
-export const setUserProfile = (profile) => ({
+export const setUserProfile = (profile: ProfileType): SetUserProfileActionType => ({
     type: SET_USER_PROFILE,
     profile,
 });
-export const setStatus = (status) => ({
+
+type SetStatusActionType = {
+    type: typeof SET_STATUS,
+    status: string,
+}
+
+export const setStatus = (status: string) => ({
     type: SET_STATUS,
     status,
 });
-export const deletePost = (postId) => ({
-    type: DELETE_POST,
-    postId,
-});
-export const savePhotoSuccess = (photos) => ({
+
+type SavePhotoSuccessActionType = {
+    type: typeof SAVE_PHOTO_SUCCESS,
+    photos: PhotosType,
+}
+
+export const savePhotoSuccess = (photos: PhotosType): SavePhotoSuccessActionType => ({
     type: SAVE_PHOTO_SUCCESS,
     photos,
 });
-export const setProfileEditStatus = (status) => ({
+
+type SetProfileEditStatusActionType = {
+    type: typeof PROFILE_EDIT_STATUS,
+    status: boolean,
+}
+
+export const setProfileEditStatus = (status: boolean): SetProfileEditStatusActionType => ({
     type: PROFILE_EDIT_STATUS,
     status,
 });
-export const editIsFetching = (isFetching) => ({
+
+type EditIsFetchingActionType = {
+    type: typeof TOGGLE_IS_FETCHING,
+    isFetching: boolean,
+}
+
+export const editIsFetching = (isFetching: boolean): EditIsFetchingActionType => ({
     type: TOGGLE_IS_FETCHING,
     isFetching,
 });
 
-
-export const getUserProfile = (userId) => async (dispatch) => {
+export const getUserProfile = (userId: number) => async (dispatch: any) => {
     let response = await UsersAPI.getProfile(userId)
 
     dispatch(setUserProfile(response.data));
 
 };
-export const getStatus = (userId) => async (dispatch) => {
+
+export const getStatus = (userId: number) => async (dispatch: any) => {
     let response = await ProfileAPI.getStatus(userId)
 
     dispatch(setStatus(response.data));
 
 };
 
-export const updateStatus = (status) => async (dispatch) => {
+export const updateStatus = (status: string) => async (dispatch: any) => {
     try {
         let response = await ProfileAPI.updateStatus(status)
 
@@ -114,7 +130,8 @@ export const updateStatus = (status) => async (dispatch) => {
 
 
 };
-export const savePhoto = (file) => async (dispatch) => {
+
+export const savePhoto = (file: any) => async (dispatch: any) => {
     let response = await ProfileAPI.savePhoto(file)
 
     if (response.data.resultCode === 0) {
@@ -122,7 +139,8 @@ export const savePhoto = (file) => async (dispatch) => {
     }
 
 };
-export const saveProfile = (profile) => async (dispatch, getState) => {
+
+export const saveProfile = (profile: ProfileType) => async (dispatch: any, getState: any) => {
     const userId = getState().auth.userId
     let response = await ProfileAPI.saveProfile(profile)
 

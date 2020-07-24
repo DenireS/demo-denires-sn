@@ -11,7 +11,7 @@ function DialogItem(props) {
     return (
         <div className={s.dialog}>
             <img src={props.img}></img>
-            <div className={s.dialog__name} onClick={() => selectDialog}>
+            <div className={s.dialog__name} onClick={() => selectDialog()}>
                 <NavLink to={'/dialogs/' + props.id} activeClassName={s.activeLink}>
                     {props.name}
                 </NavLink>

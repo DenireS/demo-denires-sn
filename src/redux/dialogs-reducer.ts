@@ -9,18 +9,19 @@ const SET_CURRENT_CHAT_INFO = 'SET_CURRENT_CHAT_INFO'
 const SET_OLD_DIALOG_USER_MESSAGES = 'SET_OLD_DIALOG_USER_MESSAGES'
 const SET_LAST_DATE = 'SET_LAST_DATE'
 
-
 let initialState = {
     lastDate: '2018-06-19',
     portionSize: 10,
-    currentChat: null,
+    currentChat: null as number | null,
     isFetching: false,
-    profile: null,
+    profile: null as number | null,
     users: [],
-    messages: [],
+    messages: [] as any,
 };
 
-export const dialogsReducer = (state = initialState, action) => {
+type InitialStateType = typeof initialState
+
+export const dialogsReducer = (state = initialState, action: any): InitialStateType => {
     switch (action.type) {
         case SEND_MESSAGE:
             let body = action.newMessageBody;
@@ -53,11 +54,9 @@ export const dialogsReducer = (state = initialState, action) => {
             }
         }
         case SET_OLD_DIALOG_USER_MESSAGES: {
-
             return {
                 ...state,
-                // messages: state.messages.concat(action.items.reverse())
-                messages: state.messages.concat(action.items).filter(function (el) {
+                messages: state.messages.concat(action.items).filter(function (el: number) {
                     return state.messages.indexOf(el) === -1;
                 }).reverse()
             }
@@ -81,84 +80,89 @@ export const dialogsReducer = (state = initialState, action) => {
 };
 
 
-export const setDialogUserData = (dialogs) => ({
+export const setDialogUserData = (dialogs: any) => ({
     type: SET_DIALOG_USER_DATA,
     dialogs
 });
-export const setlastDate = (date) => ({
+
+type setDialogUserData = {
+    type: typeof SET_LAST_DATE,
+    date: string
+}
+
+export const setlastDate = (date: string): setDialogUserData => ({
     type: SET_LAST_DATE,
     date
 });
-export const setDialogUserMessages = (items) => ({
+export const setDialogUserMessages = (items: any) => ({
     type: SET_DIALOG_USER_MESSAGES,
     items
 });
-export const setOldDialogUserMessages = (items) => ({
+export const setOldDialogUserMessages = (items: any) => ({
     type: SET_OLD_DIALOG_USER_MESSAGES,
     items
 });
 
-export const dialogsIsFetching = (isFetching) => ({
+export const dialogsIsFetching = (isFetching: boolean) => ({
     type: TOGGLE_IS_FETCHING,
     isFetching,
 });
-export const setCurrentChat = (id) => ({
+export const setCurrentChat = (id: number) => ({
     type: SET_CURRENT_CHAT,
     id,
 });
 
-export const setCurrentChatInfo = (profile) => ({
+export const setCurrentChatInfo = (profile: any) => ({
     type: SET_CURRENT_CHAT_INFO,
     profile,
 });
 
-export const sendMessage = (id, body) =>
-    async (dispatch) => {
+export const sendMessage = (id: number, body: any) =>
+    async (dispatch: any) => {
         let response = await DialogsAPI.sendMessage(id, body)
         dispatch(requestMessages(id))
     }
 
-export const sendUserMessage = (id, body) =>
-    async (dispatch) => {
+export const sendUserMessage = (id: number, body: any) =>
+    async (dispatch: any) => {
         let response = await DialogsAPI.sendMessage(id, body)
     }
 
 
-export const startChatting = (id) =>
-    async (dispatch) => {
+export const startChatting = (id: number) =>
+    async (dispatch: any) => {
         let response = await DialogsAPI.getChatting(id)
     }
 
-export const requestMessages = (id) =>
-    async (dispatch) => {
+export const requestMessages = (id: number) =>
+    async (dispatch: any) => {
 
         let response = await DialogsAPI.getMessages(id)
         dispatch(setDialogUserMessages(response.data.items))
         let response2 = await ProfileAPI.getProfile(id)
         dispatch(setCurrentChatInfo(response2.data))
     }
-export const requestOldMessages = (id, date) =>
-    async (dispatch) => {
-
+export const requestOldMessages = (id: number, date: string) =>
+    async (dispatch: any) => {
         let response = await DialogsAPI.getOldMessages(id, date)
         dispatch(setOldDialogUserMessages(response.data))
     }
 
 export const requestDialogs = () =>
-    async (dispatch) => {
+    async (dispatch: any) => {
         dispatch(dialogsIsFetching(true))
         let respone = await DialogsAPI.getDialogs();
         dispatch(setDialogUserData(respone.data))
         dispatch(dialogsIsFetching(false))
     }
 
-export const deleteMessage = (messageId, recipientId) =>
-    async (dispatch) => {
+export const deleteMessage = (messageId: number) =>
+    async (dispatch: any) => {
         let respone = await DialogsAPI.deleteMessage(messageId);
 
     }
-export const restoreMessage = (messageId) =>
-    async (dispatch) => {
+export const restoreMessage = (messageId: number) =>
+    async (dispatch: any) => {
         let respone = await DialogsAPI.restoreMessage(messageId);
     }
 
