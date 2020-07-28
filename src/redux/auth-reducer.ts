@@ -1,4 +1,4 @@
-import {AuthAPI, SecurityAPI} from '../api/api';
+import {AuthAPI, ResponseResultCodes, SecurityAPI} from '../api/api';
 import {stopSubmit} from 'redux-form';
 
 const SET_USER_DATA = 'auth/SET_USER_DATA';
@@ -65,9 +65,9 @@ export const setCaptchaURL = (captchaURL: string): SetCaptchaActionURL => ({
 });
 
 export const getAuthUserData = () => async (dispatch: any) => {
-    let response = await AuthAPI.me();
-    if (response.data.resultCode === 0) {
-        let {id, email, login} = response.data.data;
+    let data = await AuthAPI.me();
+    if (data.resultCode === ResponseResultCodes.Success) {
+        let {id, email, login} = data.data;
         dispatch(setAuthUserData(id, email, login, true));
     }
 
@@ -81,16 +81,16 @@ export const getCaptchaUrl = () => async (dispatch: any) => {
 
 export const Login = (email: string, password: string, rememberMe: boolean, captcha: string) =>
     async (dispatch: any) => {
-        let response = await AuthAPI.login(email, password, rememberMe, captcha);
+        let data = await AuthAPI.login(email, password, rememberMe, captcha);
 
-        if (response.data.resultCode === 0) {
+        if (data.resultCode === ResponseResultCodes.Success) {
             dispatch(getAuthUserData());
         } else {
-            if (response.data.resultCode === 10) {
+            if (data.resultCode === 10) {
                 dispatch(getCaptchaUrl())
             }
-            let message = response.data.messages.length > 0
-                ? response.data.messages[0]
+            let message = data.messages.length > 0
+                ? data.messages[0]
                 : 'Some error';
             dispatch(stopSubmit('login', {_error: message}));
         }
@@ -99,7 +99,7 @@ export const Logout = () => {
     return async (dispatch: any) => {
         let response = await AuthAPI.logout();
 
-        if (response.data.resultCode === 0) {
+        if (response.data.resultCode === ResponseResultCodes.Success) {
             dispatch(setAuthUserData(null, null, null, false));
         }
 
