@@ -1,4 +1,5 @@
-import {DialogsAPI, ProfileAPI} from "../api/api";
+import {ProfileAPI} from "../api/profile-api";
+import {DialogsAPI} from "../api/dialogs-api";
 
 const SEND_MESSAGE = 'SEND_MESSAGE';
 const SET_DIALOG_USER_DATA = 'SET_DIALOG_USER_DATA'
@@ -139,8 +140,8 @@ export const requestMessages = (id: number) =>
 
         let response = await DialogsAPI.getMessages(id)
         dispatch(setDialogUserMessages(response.data.items))
-        let response2 = await ProfileAPI.getProfile(id)
-        dispatch(setCurrentChatInfo(response2.data))
+        let data2 = await ProfileAPI.getProfile(id)
+        dispatch(setCurrentChatInfo(data2))
     }
 export const requestOldMessages = (id: number, date: string) =>
     async (dispatch: any) => {

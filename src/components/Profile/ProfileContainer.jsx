@@ -1,8 +1,6 @@
 import React from 'react';
 import s from './Profile.module.css';
-import * as axios from 'axios';
 import {
-    setUserProfile,
     getUserProfile,
     getStatus,
     updateStatus, savePhoto, saveProfile, setProfileEditStatus, editIsFetching,
@@ -12,6 +10,7 @@ import {connect} from 'react-redux';
 import {withRouter, Redirect} from 'react-router-dom';
 import {compose} from 'redux';
 import {sendUserMessage} from "../../redux/dialogs-reducer";
+
 
 class ProfileContainer extends React.Component {
 
@@ -57,7 +56,6 @@ let mapStateToProps = (state) => ({
 
 export default compose(
     connect(mapStateToProps, {
-        setUserProfile,
         getUserProfile,
         getStatus,
         updateStatus,

@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import styles from './users.module.css';
 import userPhoto from '../../assets/images/User.jpg';
 import {NavLink} from 'react-router-dom';
-import {FormType} from "../../hoc/FormsControls";
+import {FormType} from "../common/FormsControls/FormsControls";
 import {maxLengthCreator, required} from "../../utils/validators/validators";
 import {Field, reduxForm} from "redux-form";
 
