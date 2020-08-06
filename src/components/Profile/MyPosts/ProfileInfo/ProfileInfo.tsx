@@ -1,26 +1,42 @@
-import React, {useEffect, useState} from 'react';
+import React, {ChangeEvent, SetStateAction, useState} from 'react';
 import s from './ProfileInfo.module.css';
 import Preloader from '../../../common/Preloader/Preloader';
 import ProfileStatusWithHooks from './ProfileStatusWithHooks';
 import userPhoto from '../../../../assets/images/User.jpg';
 import ProfileDataForm from "./ProfileDataForm";
 import AddMessageUserFormRedux from "../../../common/MessageForm/UsersMessageForm";
+import {ContactsType, ProfileType} from "../../../../types/types";
 
-function ProfileInfo({
-                         profile, status, updateStatus, isOwner, savePhoto, saveProfile,
-                         profileEditStatus, setProfileEditStatus, editIsFetching, isFetching,
-                         sendUserMessage
-                     }) {
+type PropsType = {
+    profile: ProfileType |null
+    status: string
+    profileEditStatus: boolean
+    isFetching: boolean
+    isOwner: boolean
+
+    updateStatus: (status: string) => void
+    savePhoto: (file: File) => void
+    saveProfile: (profile: ProfileType) => void
+    setProfileEditStatus: (status: boolean) => boolean
+    editIsFetching: (status: boolean) => boolean
+    sendUserMessage: (receiverId: number | null, body: string) => boolean
+}
+
+const ProfileInfo: React.FC<PropsType> = ({
+                                              profile, status, updateStatus, isOwner, savePhoto, saveProfile,
+                                              profileEditStatus, setProfileEditStatus, editIsFetching, isFetching,
+                                              sendUserMessage
+                                          }) => {
 
     let [formControl, setFormControl] = useState(false)
-    let [receiverId, setReceiverId] = useState(null)
+    let [receiverId, setReceiverId] = useState<null | number>(null)
 
-    let openForm = (id) => {
+    let openForm = (id: SetStateAction<null | number>) => {
         setFormControl(true)
         setReceiverId(id)
     }
 
-    const onSubmit = (formDate) => {
+    const onSubmit = (formDate: ProfileType) => {
         editIsFetching(true)
         saveProfile(formDate);
     };
@@ -30,14 +46,14 @@ function ProfileInfo({
     if (!profile) {
         return <Preloader/>;
     }
-    const onMainPhotoSelected = (e) => {
-        if (e.target.files.length) {
+    const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files?.length) {
             savePhoto(e.target.files[0]);
         }
     }
 
 
-    let addNewMessage = (values) => {
+    let addNewMessage = (values: any) => {
         sendUserMessage(receiverId, values.newMessageBody);
         values.newMessageBody = null;
     };
@@ -67,7 +83,13 @@ function ProfileInfo({
     );
 }
 
-const ProfileData = ({profile, isOwner, goToEditMode}) => {
+type ProfileDataPropsType = {
+    profile: ProfileType
+    isOwner: boolean
+    goToEditMode: ()=> void
+}
+
+const ProfileData:React.FC<ProfileDataPropsType> = ({profile, isOwner, goToEditMode}) => {
 
     let [activeClass, setActiveClass] = useState('active');
 
@@ -93,13 +115,18 @@ const ProfileData = ({profile, isOwner, goToEditMode}) => {
             <div className={s[activeClass]}>
                 <div className={s.contactsMenu} onClick={() => setActiveClass('passive')}></div>
                 <b>Contacts</b>: {Object.keys(profile.contacts).map(key =>
-                <Contact contactTitle={key} key={key} contactValue={profile.contacts[key]}/>)}
+                <Contact contactTitle={key} key={key} contactValue={profile.contacts[key as keyof ContactsType]}/>)}
             </div>
         </div>
     )
 }
 
-const Contact = ({contactTitle, contactValue}) => {
+type ContactsPropsType = {
+    contactTitle: string
+    contactValue: string
+}
+
+const Contact: React.FC<ContactsPropsType> = ({contactTitle, contactValue}) => {
     return <div className={s.contact}><b>{contactTitle}</b>: {contactValue}</div>
 }
 

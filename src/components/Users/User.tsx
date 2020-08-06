@@ -5,11 +5,23 @@ import {NavLink} from 'react-router-dom';
 import {FormType} from "../common/FormsControls/FormsControls";
 import {maxLengthCreator, required} from "../../utils/validators/validators";
 import {Field, reduxForm} from "redux-form";
+import {UsersType} from "../../types/types";
 
+type PropsType = {
+    user: UsersType
+    followingInProgress: Array<number>
 
-let User = ({user, followingInProgress, unfollow, follow, setFormControl, setReceiverId, setReceiver, setPhoto}) => {
+    unfollow: (userId: number) => void
+    follow: (userId: number) => void
+    setFormControl: (visibility: boolean) => void
+    setReceiverId: (id: number) => void
+    setReceiver: (name: string | null) => void
+    setPhoto: (src: string | null) => void
+}
 
-    let openForm = (id, photo,name) => {
+let User: React.FC<PropsType> = ({user, followingInProgress, unfollow, follow, setFormControl, setReceiverId, setReceiver, setPhoto}) => {
+
+    let openForm = (id: number, photo: string | null, name: string) => {
         setFormControl(true)
         setReceiver(name)
         setReceiverId(id)

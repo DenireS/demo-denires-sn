@@ -1,21 +1,19 @@
 import React from 'react';
 import {
+    actions,
     deleteMessage,
-    requestCurrentChatInfo,
     requestDialogs,
     requestMessages, requestOldMessages, restoreMessage,
     sendMessage,
-    setCurrentChat, setlastDate, SetPortionSize,
     startChatting
 } from '../../redux/dialogs-reducer';
 import Dialogs from './Dialogs';
 import {connect} from 'react-redux';
 import {Redirect, Route, withRouter} from 'react-router-dom';
-import {withAuthRedirect} from '../../hoc/withAuthRedirect';
+import {withAuthRedirect} from '../../hoc/withAuthRedirect.tsx';
 import {compose} from 'redux';
 import Preloader from "../common/Preloader/Preloader";
 import DialogChat from "./DialogChat";
-
 
 class DialogsContainer extends React.PureComponent {
 
@@ -67,11 +65,12 @@ let mapStateToProps = (state) => {
     };
 };
 
+// setCurrentChat:actions.setCurrentChat,setlastDate:actions.setlastDate,
 
 export default compose(
     connect(mapStateToProps, {
-        sendMessage, requestDialogs, startChatting, setCurrentChat,
-        requestMessages, deleteMessage, restoreMessage, requestOldMessages, setlastDate,
+        sendMessage, requestDialogs, startChatting, setCurrentChat:actions.setCurrentChat,
+        requestMessages, deleteMessage, restoreMessage, requestOldMessages, setlastDate:actions.setlastDate,
     }),
     withAuthRedirect,
     withRouter

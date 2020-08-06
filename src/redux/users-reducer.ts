@@ -54,9 +54,6 @@ const usersReducer = (state = initialState, action: ActionsTypes): InitialStateT
     }
 };
 
-type InitialStateType = typeof initialState
-type ActionsTypes = InferActionsTypes<typeof actions>
-type ThunkType = BaseThunkType<ActionsTypes>
 
 export const actions = {
     followSucces: (userId: number) => ({
@@ -119,14 +116,19 @@ const _followUnfollowFlow = async (dispatch: Dispatch<ActionsTypes>, userId: num
 
 export const follow = (userId: number): ThunkType => {
     return async (dispatch: any) => {
-        _followUnfollowFlow(dispatch, userId, UsersAPI.follow(userId), actions.followSucces)
+        await _followUnfollowFlow(dispatch, userId, UsersAPI.follow(userId), actions.followSucces)
     };
 }
 
 export const unfollow = (userId: number): ThunkType => {
     return async (dispatch: any) => {
-        _followUnfollowFlow(dispatch, userId, UsersAPI.unfollow(userId), actions.unfollowSucces);
+        await _followUnfollowFlow(dispatch, userId, UsersAPI.unfollow(userId), actions.unfollowSucces);
     }
 };
 
 export default usersReducer;
+
+
+export type InitialStateType = typeof initialState
+type ActionsTypes = InferActionsTypes<typeof actions>
+type ThunkType = BaseThunkType<ActionsTypes>

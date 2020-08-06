@@ -4,7 +4,7 @@ import {Field} from "redux-form";
 import {FieldValidatorType} from "../../../utils/validators/validators";
 
 export function createField<FormKeysType extends string>(placeholder: string | undefined, name: FormKeysType, validators: Array<FieldValidatorType>,
-                            component: string | React.ReactNode, props?: any, text = '') {
+                                                         component: string | React.ReactNode, props?: any, text = '') {
     return (
         <div>
             <Field
@@ -45,3 +45,5 @@ export const FormType = (Element: string): FormControlType => ({input, meta: {to
         </div>
     );
 };
+
+export type GetStringKeys<T> = Extract<keyof T, string>

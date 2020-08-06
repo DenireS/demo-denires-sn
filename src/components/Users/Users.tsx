@@ -24,8 +24,8 @@ let Users: React.FC<PropsType> = ({currentPage, onPageChanged, totalItemsCount, 
 
     let [formControl, setFormControl] = useState(false)
     let [receiverId, setReceiverId] = useState(0)
-    let [receiver, setReceiver] = useState(null)
-    let [photo, setPhoto] = useState(null)
+    let [receiver, setReceiver] = useState<string | null>(null)
+    let [photo, setPhoto] = useState<string | null>(null)
 
     let addNewMessage = (values: any) => {
         props.sendUserMessage(receiverId, values.newMessageBody);

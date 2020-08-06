@@ -2,10 +2,6 @@ import React from 'react';
 import {HashRouter, Redirect, Route, Switch, withRouter} from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
-import News from './components/News/News';
-import Settings from './components/Settings/Settings';
-import Music from './components/Music/Music';
-
 import UsersContainer from './components/Users/UsersContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
@@ -14,16 +10,20 @@ import {connect, Provider} from 'react-redux';
 import {compose} from 'redux';
 import {initializeApp} from './redux/app-reducer';
 import Preloader from './components/common/Preloader/Preloader';
-import store from "./redux/redux-store";
+import store, {AppStateType} from "./redux/redux-store";
 import {withSuspense} from "./hoc/withSuspense";
 
 //import DialogsContainer from './components/Dialogs/DialogsContainer';
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 
+type MapPropsType = ReturnType<typeof mapStateToProps>
+type DispatchPropsType = {
+    initializeApp: () => void
+}
 
-class App extends React.Component {
+class App extends React.Component<MapPropsType & DispatchPropsType> {
 
-    catchAllUnhandledErrors = (promiseRejectionEvent) => {
+    catchAllUnhandledErrors = (promiseRejectionEvent: PromiseRejectionEvent) => {
         alert('Some errors')
         console.log(promiseRejectionEvent)
     }
@@ -52,10 +52,7 @@ class App extends React.Component {
                         <Route path="/dialogs/:userId?" render={withSuspense(DialogsContainer)}/>
                         <Route path="/profile/:userId?" render={() => <ProfileContainer/>}/>
                         <Route path="/users" render={() => <UsersContainer pageTitle={'hello'}/>}/>
-                        <Route path="/news" render={() => <News/>}/>
                         <Route path="/login" render={() => <Login/>}/>
-                        <Route path="/music" render={() => <Music/>}/>
-                        <Route path="/settings" render={() => <Settings/>}/>
                         <Route path="*" render={() => <div>404</div>}/>
                     </Switch>
                 </div>
@@ -65,14 +62,14 @@ class App extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppStateType) => ({
     initialized: state.app.initialized,
 });
 
-let AppContainer = compose(
+let AppContainer = compose<React.ComponentType>(
     connect(mapStateToProps, {initializeApp,}), withRouter)(App);
 
-const MainSNApp = (props) => {
+const MainSNApp: React.FC = () => {
     return <HashRouter>
         <Provider store={store}>
             <AppContainer/>
