@@ -1,10 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styles from './users.module.css';
 import userPhoto from '../../assets/images/User.jpg';
 import {NavLink} from 'react-router-dom';
-import {FormType} from "../common/FormsControls/FormsControls";
-import {maxLengthCreator, required} from "../../utils/validators/validators";
-import {Field, reduxForm} from "redux-form";
 import {UsersType} from "../../types/types";
 
 type PropsType = {

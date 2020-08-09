@@ -1,21 +1,21 @@
 import React, {useState, useEffect, ChangeEvent} from 'react';
 import s from './ProfileInfo.module.css';
-import profileReducer from '../../../../redux/profile-reducer';
-import Preloader from '../../../common/Preloader/Preloader';
+import {updateStatus} from '../../../../redux/profile-reducer';
+import {Preloader} from '../../../common/Preloader/Preloader';
+import {useDispatch, useSelector} from "react-redux";
+import {getStatus} from "../../../../redux/profile-selectors";
 
+const ProfileStatusWithHooks: React.FC = () => {
 
-type PropsType = {
-    status: string
-    updateStatus: (newStatus: string) => void
-}
+    const statusSelector = useSelector(getStatus)
+    const dispatch = useDispatch()
 
-const ProfileStatusWithHooks: React.FC<PropsType> = (props) => {
     let [editMode, setEditMode] = useState(false);
-    let [status, setStatus] = useState(props.status);
+    let [status, setStatus] = useState(statusSelector);
 
     useEffect(() => {
-        setStatus(props.status);
-    }, [props.status]);
+        setStatus(status);
+    }, [status]);
 
     let activateEditMode = () => {
         setEditMode(true);
@@ -23,7 +23,7 @@ const ProfileStatusWithHooks: React.FC<PropsType> = (props) => {
 
     const deactivateEditMode = () => {
         setEditMode(false);
-        props.updateStatus(status);
+        dispatch(updateStatus(status))
     };
     const onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
         setStatus(e.currentTarget.value);
@@ -34,7 +34,7 @@ const ProfileStatusWithHooks: React.FC<PropsType> = (props) => {
             {!editMode && (
                 <div>
                     <b>Status</b>: <span onDoubleClick={activateEditMode}>
-            {props.status || '-----'}
+            {status || '-----'}
           </span>
                 </div>
             )}

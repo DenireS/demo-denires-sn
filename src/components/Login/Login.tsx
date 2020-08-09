@@ -4,10 +4,11 @@ import styles from '../common/FormsControls/FormsControls.module.css';
 import {reduxForm, InjectedFormProps} from 'redux-form';
 import {required} from '../../utils/validators/validators';
 import {FormType, createField} from '../common/FormsControls/FormsControls';
-import {connect} from 'react-redux';
+import {connect, useDispatch, useSelector} from 'react-redux';
 import {Logout, Login} from '../../redux/auth-reducer';
 import {Redirect} from 'react-router-dom';
 import {AppStateType} from "../../redux/redux-store";
+import {getCaptchaURL, getIsAuth} from "../../redux/auth-selectors";
 
 const Input = FormType('input');
 
@@ -41,33 +42,25 @@ type LoginFormOwnType = {
 }
 type LoginFormValuesTypeKeys = Extract<keyof LoginFormValuesType, string>
 
-type MapStateType = {
-    isAuth: boolean
-    captchaURL: string | null
-}
-type MapDispatchType = {
-    Login: (email: string, password: string, rememberMe: boolean, captcha: string) => void
-}
+export const LoginPage: React.FC = (props) => {
 
-const LoginAuth: React.FC<MapStateType & MapDispatchType> = (props) => {
+    const isAuth = useSelector(getIsAuth)
+    const captchaURL = useSelector(getCaptchaURL)
+
+    const dispatch = useDispatch()
+
     const onSubmit = (formDate: LoginFormValuesType) => {
-        props.Login(formDate.email, formDate.password, formDate.rememberMe, formDate.captcha);
+        dispatch(Login(formDate.email, formDate.password, formDate.rememberMe, formDate.captcha))
     };
 
-    if (props.isAuth) {
+    if (isAuth) {
         return <Redirect to="/profile"/>;
     }
 
     return (
         <div>
             <h1>Login</h1>
-            <LoginReduxForm onSubmit={onSubmit} captchaURL={props.captchaURL}/>
+            <LoginReduxForm onSubmit={onSubmit} captchaURL={captchaURL}/>
         </div>
     );
 };
-const mapStateToProps = (state: AppStateType): MapStateType => ({
-    isAuth: state.auth.isAuth,
-    captchaURL: state.auth.captchaURL,
-});
-
-export default connect(mapStateToProps, {Logout, Login})(LoginAuth);

@@ -11,7 +11,7 @@ type PropsType = {
 }
 
 
-let Paginator: React.FC<PropsType> = ({
+export const Paginator: React.FC<PropsType> = ({
                                           totalItemsCount,
                                           pageSize,
                                           currentPage,
@@ -57,7 +57,5 @@ let Paginator: React.FC<PropsType> = ({
         </div>
     );
 };
-
-export default Paginator;
 
 //className={styles.pages && (currentPage === p ? styles.selectedPage : styles.notSelectedPage)}

@@ -1,20 +1,17 @@
 import React, {ChangeEvent, SetStateAction, useState} from 'react';
 import s from './ProfileInfo.module.css';
-import Preloader from '../../../common/Preloader/Preloader';
+import {Preloader} from '../../../common/Preloader/Preloader';
 import ProfileStatusWithHooks from './ProfileStatusWithHooks';
 import userPhoto from '../../../../assets/images/User.jpg';
 import ProfileDataForm from "./ProfileDataForm";
-import AddMessageUserFormRedux from "../../../common/MessageForm/UsersMessageForm";
+import {AddMessageUserFormRedux} from "../../../common/MessageForm/UsersMessageForm";
 import {ContactsType, ProfileType} from "../../../../types/types";
+import {useSelector} from "react-redux";
+import {getIsFetching, getProfile, getProfileEditStatus} from "../../../../redux/profile-selectors";
 
 type PropsType = {
-    profile: ProfileType |null
-    status: string
-    profileEditStatus: boolean
-    isFetching: boolean
     isOwner: boolean
 
-    updateStatus: (status: string) => void
     savePhoto: (file: File) => void
     saveProfile: (profile: ProfileType) => void
     setProfileEditStatus: (status: boolean) => boolean
@@ -23,10 +20,14 @@ type PropsType = {
 }
 
 const ProfileInfo: React.FC<PropsType> = ({
-                                              profile, status, updateStatus, isOwner, savePhoto, saveProfile,
-                                              profileEditStatus, setProfileEditStatus, editIsFetching, isFetching,
+                                              isOwner, savePhoto, saveProfile,
+                                               setProfileEditStatus, editIsFetching,
                                               sendUserMessage
                                           }) => {
+
+    const profile = useSelector(getProfile)
+    const profileEditStatus = useSelector(getProfileEditStatus)
+    const isFetching = useSelector(getIsFetching)
 
     let [formControl, setFormControl] = useState(false)
     let [receiverId, setReceiverId] = useState<null | number>(null)
@@ -76,8 +77,7 @@ const ProfileInfo: React.FC<PropsType> = ({
                     <ProfileData profile={profile} isOwner={isOwner}
                                  goToEditMode={goToEditMode}/>}
 
-                <ProfileStatusWithHooks status={status} updateStatus={updateStatus}
-                />
+                <ProfileStatusWithHooks/>
             </div>
         </div>
     );

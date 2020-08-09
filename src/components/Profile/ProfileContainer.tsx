@@ -6,18 +6,18 @@ import {
     updateStatus, savePhoto, saveProfile, setProfileEditStatus, editIsFetching,
 } from '../../redux/profile-reducer';
 import Profile from './Profile';
-import {connect} from 'react-redux';
+import {connect, useSelector} from 'react-redux';
 import {withRouter, RouteComponentProps} from 'react-router-dom';
 import {compose} from 'redux';
 import {sendUserMessage} from "../../redux/dialogs-reducer";
 import {AppStateType} from "../../redux/redux-store";
 import {ProfileType} from "../../types/types";
+import {getProfile} from "../../redux/profile-selectors";
 
 type MapPropsType = ReturnType<typeof mapStateToProps>
 type DispatchPropsType = {
     getUserProfile: (id: number) => void
     getStatus: (id: number) => void
-    updateStatus: (status: string) => void
     savePhoto: (file: File) => void
     saveProfile: (profile: ProfileType) => void
     setProfileEditStatus: (status: boolean) => boolean
@@ -69,7 +69,6 @@ class ProfileContainer extends React.Component<PropsType> {
 
 let mapStateToProps = (state: AppStateType) => ({
     profile: state.profilePage.profile,
-    status: state.profilePage.status,
     authorizedUserId: state.auth.userId,
     isAuth: state.auth.isAuth,
     profileEditStatus: state.profilePage.profileEditStatus,

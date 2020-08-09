@@ -12,7 +12,7 @@ import {connect} from 'react-redux';
 import {Redirect, Route, withRouter} from 'react-router-dom';
 import {withAuthRedirect} from '../../hoc/withAuthRedirect.tsx';
 import {compose} from 'redux';
-import Preloader from "../common/Preloader/Preloader";
+import {Preloader} from "../common/Preloader/Preloader";
 import DialogChat from "./DialogChat";
 
 class DialogsContainer extends React.PureComponent {
