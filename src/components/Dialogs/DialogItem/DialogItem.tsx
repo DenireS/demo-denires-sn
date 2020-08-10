@@ -1,11 +1,16 @@
 import React from 'react';
 import s from '../Dialogs.module.css';
 import {NavLink} from 'react-router-dom';
+import {useDispatch} from "react-redux";
+import {actions} from "../../../redux/dialogs-reducer";
 
 
-function DialogItem(props) {
+export const DialogItem=(props:any) => {
+
+    const dispatch= useDispatch()
+
     let selectDialog = () => {
-        props.setCurrentChat(props.id)
+        dispatch(actions.setCurrentChat(props.id))
     }
 
     return (
@@ -20,4 +25,3 @@ function DialogItem(props) {
     );
 }
 
-export default DialogItem;

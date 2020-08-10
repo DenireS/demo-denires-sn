@@ -118,11 +118,8 @@ export const startChatting = (id: number): ThunkType =>
 
 export const requestMessages = (id: number): ThunkType =>
     async (dispatch) => {
-
         let response = await DialogsAPI.getMessages(id)
         dispatch(actions.setDialogUserMessages(response.data.items))
-        let data2 = await ProfileAPI.getProfile(id)
-        dispatch(actions.setCurrentChatInfo(data2))
     }
 
 export const requestOldMessages = (id: number, date: string): ThunkType =>

@@ -3,25 +3,38 @@ import s from '../DialogChat.module.css';
 import {formattedDate, formattedTime} from "../../common/DateControls/DateControls";
 import classNames from 'classnames'
 
+type PropsType = {
+    senderId:number
+    authUserId: number | null
+    message: string
+    senderName: string
+    id: number
+    date: string | number
+    viewed: boolean
+    recipientId: number
 
-function Message(props) {
+    restoreChatMessage: (id:number)=> void
+    deleteChatMessage: (id:number)=> void
+}
+
+export const Message:React.FC<PropsType>=(props) =>{
     let [restore, setRestore] = useState(false)
     let [messageId, setMessageId] = useState(null)
     let [deleted, setDeleted] = useState('messageBody')
     let [fullMessage, setFullMessage] = useState('message')
 
-    let deleteMessage = (id) => {
+    let deleteMessage = (id:any) => {
         setMessageId(id)
         setRestore(true)
         setDeleted('deleted')
     }
-    let restoreMessage = (id) => {
-        props.restoreMessage(props.id)
+    let restoreMessage = () => {
+        props.restoreChatMessage(props.id)
         setRestore(false)
         setDeleted('messageBody')
     }
-    let confirmDeleting = (id) => {
-        props.deleteMessage(props.id, props.recipientId)
+    let confirmDeleting = () => {
+        props.deleteChatMessage(props.id)
         setRestore(false)
         setFullMessage('messageDeleted')
     }
@@ -44,8 +57,8 @@ function Message(props) {
                         </span>
                         {restore && <div className={s.confirmDeleting}>
                             <div>Are you ready</div>
-                            <button className={s.restore} onClick={() => restoreMessage(messageId)}>Restore</button>
-                            <button className={s.restore} onClick={() => confirmDeleting(messageId)}>Delete</button>
+                            <button className={s.restore} onClick={() => restoreMessage()}>Restore</button>
+                            <button className={s.restore} onClick={() => confirmDeleting()}>Delete</button>
                         </div>}
                     </div>
                     : <div className={s.messageReceived}>
@@ -59,8 +72,8 @@ function Message(props) {
                             </span>
                         {restore && <div className={s.confirmDeleting}>
                             <div>Are you ready</div>
-                            <button className={s.restore} onClick={() => restoreMessage(messageId)}>Restore</button>
-                            <button className={s.restore} onClick={() => confirmDeleting(messageId)}>Delete</button>
+                            <button className={s.restore} onClick={() => restoreMessage()}>Restore</button>
+                            <button className={s.restore} onClick={() => confirmDeleting()}>Delete</button>
                         </div>}
 
                     </div>}
@@ -73,4 +86,3 @@ function Message(props) {
     );
 }
 
-export default Message;

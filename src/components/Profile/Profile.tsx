@@ -1,27 +1,15 @@
 import React from 'react';
 import s from './Profile.module.css';
-import ProfileInfo from './MyPosts/ProfileInfo/ProfileInfo';
-import {ProfileType} from "../../types/types";
+import {ProfileInfo} from './MyPosts/ProfileInfo/ProfileInfo';
 
 type PropsType = {
-    profile: ProfileType |null
-    profileEditStatus: boolean
-    isFetching: boolean
     isOwner: boolean
-
-    savePhoto: (file: File) => void
-    saveProfile: (profile: ProfileType) => void
-    setProfileEditStatus: (status: boolean) => boolean
-    editIsFetching: (status: boolean) => boolean
-    sendUserMessage: (receiverId: number | null, body: string) => boolean
 }
 
-const Profile: React.FC<PropsType> = (props) => {
+export const Profile: React.FC<PropsType> = (props) => {
     return (
         <div>
             <ProfileInfo {...props}/>
         </div>
     );
 }
-
-export default Profile;

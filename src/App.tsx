@@ -1,80 +1,70 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {HashRouter, Redirect, Route, Switch, withRouter} from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import {UsersPage} from './components/Users/UsersContainer';
-import ProfileContainer from './components/Profile/ProfileContainer';
+import {ProfileWrappedContainer} from './components/Profile/ProfileContainer';
 import {LoginPage} from "./components/Login/Login";
 import {HeaderPage} from "./components/Header/Header";
-import {connect, Provider} from 'react-redux';
-import {compose} from 'redux';
+import {Provider, useDispatch, useSelector} from 'react-redux';
 import {initializeApp} from './redux/app-reducer';
 import {Preloader} from './components/common/Preloader/Preloader';
-import store, {AppStateType} from "./redux/redux-store";
+import store from "./redux/redux-store";
 import {withSuspense} from "./hoc/withSuspense";
+import {getInitialized} from "./redux/app-selectors";
+
+import DialogsContainer from './components/Dialogs/DialogsContainer';
+// const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer);
 
 
-//import DialogsContainer from './components/Dialogs/DialogsContainer';
-const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
+const App = () => {
 
-type MapPropsType = ReturnType<typeof mapStateToProps>
-type DispatchPropsType = {
-    initializeApp: () => void
-}
+    const initialized = useSelector(getInitialized)
+    const dispatch = useDispatch()
 
-class App extends React.Component<MapPropsType & DispatchPropsType> {
-
-    catchAllUnhandledErrors = (promiseRejectionEvent: PromiseRejectionEvent) => {
+    const catchAllUnhandledErrors = (promiseRejectionEvent: PromiseRejectionEvent) => {
         alert('Some errors')
         console.log(promiseRejectionEvent)
     }
 
+    useEffect(() => {
+        dispatch(initializeApp())
+        window.addEventListener('unhandledrejection', catchAllUnhandledErrors)
 
-    componentDidMount() {
-        this.props.initializeApp();
-        window.addEventListener('unhandledrejection', this.catchAllUnhandledErrors)
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener('unhandledrejection', this.catchAllUnhandledErrors)
-    }
-
-    render() {
-        if (!this.props.initialized) {
-            return <Preloader/>;
+        return () => {
+            window.removeEventListener('unhandledrejection', catchAllUnhandledErrors)
         }
-        return (
-            <div className="app-wrapper">
-                <HeaderPage/>
-                <Navbar/>
-                <div className="app-wrapper__content">
-                    <Switch>
-                        <Redirect exact from="/" to="/profile"/>
-                        <Route path="/dialogs/:userId?" render={withSuspense(DialogsContainer)}/>
-                        <Route path="/profile/:userId?" render={() => <ProfileContainer/>}/>
-                        <Route path="/users/:page?" render={() => <UsersPage pageTitle={'samurai'}/>}/>
-                        <Route path="/login" render={() => <LoginPage/>}/>
-                        <Route path="*" render={() => <div>404</div>}/>
-                    </Switch>
-                </div>
-            </div>
-        )
-            ;
+    }, [])
+
+
+    if (!initialized) {
+        return <Preloader/>;
     }
+    return (
+        <div className="app-wrapper">
+            <HeaderPage/>
+            <Navbar/>
+            <div className="app-wrapper__content">
+                <Switch>
+                    <Redirect exact from="/" to="/profile"/>
+                    <Route path="/dialogs/:userId?" render={() => <DialogsContainer/>}/>
+                    <Route path="/profile/:userId?" render={() => <ProfileWrappedContainer/>}/>
+                    <Route path="/users/:page?" render={() => <UsersPage pageTitle={'samurai'}/>}/>
+                    <Route path="/login" render={() => <LoginPage/>}/>
+                    <Route path="*" render={() => <div>404</div>}/>
+                </Switch>
+            </div>
+        </div>
+    )
 }
 
-const mapStateToProps = (state: AppStateType) => ({
-    initialized: state.app.initialized,
-});
 
-let AppContainer = compose<React.ComponentType>(
-    connect(mapStateToProps, {initializeApp,}), withRouter)(App);
+const AppContainer = (withRouter)(App);
 
-const MainSNApp: React.FC = () => {
+export const MainSNApp: React.FC = () => {
     return <HashRouter>
         <Provider store={store}>
             <AppContainer/>
         </Provider>
     </HashRouter>
 }
-export default MainSNApp

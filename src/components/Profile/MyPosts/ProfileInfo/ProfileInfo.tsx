@@ -6,28 +6,22 @@ import userPhoto from '../../../../assets/images/User.jpg';
 import ProfileDataForm from "./ProfileDataForm";
 import {AddMessageUserFormRedux} from "../../../common/MessageForm/UsersMessageForm";
 import {ContactsType, ProfileType} from "../../../../types/types";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {getIsFetching, getProfile, getProfileEditStatus} from "../../../../redux/profile-selectors";
+import {editIsFetching, savePhoto, saveProfile, setProfileEditStatus} from "../../../../redux/profile-reducer";
+import {sendUserMessage} from "../../../../redux/dialogs-reducer";
 
 type PropsType = {
     isOwner: boolean
-
-    savePhoto: (file: File) => void
-    saveProfile: (profile: ProfileType) => void
-    setProfileEditStatus: (status: boolean) => boolean
-    editIsFetching: (status: boolean) => boolean
-    sendUserMessage: (receiverId: number | null, body: string) => boolean
 }
 
-const ProfileInfo: React.FC<PropsType> = ({
-                                              isOwner, savePhoto, saveProfile,
-                                               setProfileEditStatus, editIsFetching,
-                                              sendUserMessage
-                                          }) => {
+export const ProfileInfo: React.FC<PropsType> = ({isOwner }) => {
 
     const profile = useSelector(getProfile)
     const profileEditStatus = useSelector(getProfileEditStatus)
     const isFetching = useSelector(getIsFetching)
+
+    const dispatch = useDispatch();
 
     let [formControl, setFormControl] = useState(false)
     let [receiverId, setReceiverId] = useState<null | number>(null)
@@ -38,24 +32,24 @@ const ProfileInfo: React.FC<PropsType> = ({
     }
 
     const onSubmit = (formDate: ProfileType) => {
-        editIsFetching(true)
-        saveProfile(formDate);
+     dispatch(editIsFetching(true));
+        dispatch(saveProfile(formDate));
     };
     const goToEditMode = () => {
-        setProfileEditStatus(true);
+        dispatch(setProfileEditStatus(true));
     };
     if (!profile) {
         return <Preloader/>;
     }
     const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files?.length) {
-            savePhoto(e.target.files[0]);
+            dispatch(savePhoto(e.target.files[0]));
         }
     }
 
 
     let addNewMessage = (values: any) => {
-        sendUserMessage(receiverId, values.newMessageBody);
+        dispatch(sendUserMessage(receiverId as number, values.newMessageBody));
         values.newMessageBody = null;
     };
     return (
@@ -129,5 +123,3 @@ type ContactsPropsType = {
 const Contact: React.FC<ContactsPropsType> = ({contactTitle, contactValue}) => {
     return <div className={s.contact}><b>{contactTitle}</b>: {contactValue}</div>
 }
-
-export default ProfileInfo;
