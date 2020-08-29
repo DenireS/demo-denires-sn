@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './Profile.module.css';
-import {ProfileInfo} from './MyPosts/ProfileInfo/ProfileInfo';
+import {ProfileInfo} from './ProfileInfo/ProfileInfo';
 
 type PropsType = {
     isOwner: boolean
@@ -8,7 +8,7 @@ type PropsType = {
 
 export const Profile: React.FC<PropsType> = (props) => {
     return (
-        <div>
+        <div className={s.profilePage}>
             <ProfileInfo {...props}/>
         </div>
     );

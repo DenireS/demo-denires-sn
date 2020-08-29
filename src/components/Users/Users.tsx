@@ -1,21 +1,28 @@
 import React, {useEffect, useState} from 'react';
+import s from './users.module.css';
 import {Paginator} from "../common/Paginator/Paginator";
 import User from "./User";
 import {AddMessageUserFormRedux} from "../common/MessageForm/UsersMessageForm";
 import {UsersSearchForm} from "./UsersSearchForm";
-import {FilterType, requestUsers, follow, unfollow} from "../../redux/users-reducer";
+import {FilterType, follow, requestUsers, unfollow} from "../../redux/users-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {
     getCurrentPage,
     getFollowingInProgress,
     getPageSize,
-    getPortionSize, getTotalItemsCount,
+    getPortionSize,
+    getTotalItemsCount,
     getUsers,
     getUsersFilter
 } from "../../redux/users-selectors";
 import {sendUserMessage} from "../../redux/dialogs-reducer";
+import {RouteComponentProps, withRouter} from "react-router-dom";
+import {getIsAuth} from "../../redux/auth-selectors";
 
-type PropsType = {}
+type PathParamsType = {
+    userId: string
+}
+type PropsType = RouteComponentProps<PathParamsType>;
 
 export const Users: React.FC<PropsType> = (props) => {
 
@@ -35,8 +42,8 @@ export const Users: React.FC<PropsType> = (props) => {
     const currentPage = useSelector(getCurrentPage);
     const followingInProgress = useSelector(getFollowingInProgress);
     const filter = useSelector(getUsersFilter);
-
-    const dispatch = useDispatch();
+    const isAuth = useSelector(getIsAuth);
+    const dispatch = useDispatch()
 
     const followUser = (id: number) => {
         dispatch(follow(id))
@@ -45,6 +52,7 @@ export const Users: React.FC<PropsType> = (props) => {
         dispatch(unfollow(id))
     };
     const onPageChanged = (pageNumber: number) => {
+        // @ts-ignore
         dispatch(requestUsers(pageNumber, pageSize, filter))
     };
     const onFilterChanged = (filter: FilterType) => {
@@ -57,18 +65,23 @@ export const Users: React.FC<PropsType> = (props) => {
 
     return (
 
-        <div>
-            <div>
+        <div className={s.usersPage}>
+            <div className={s.searchForm}>
                 <UsersSearchForm onFilterChanged={onFilterChanged}/>
             </div>
 
-            <Paginator currentPage={currentPage} onPageChanged={onPageChanged}
-                       totalItemsCount={totalItemsCount} pageSize={pageSize} portionSize={portionSize}/>
-            <div>
-                {users.map((u) => <User user={u} key={u.id} followingInProgress={followingInProgress}
+            <div className={s.paginator}>
+                <Paginator currentPage={currentPage} onPageChanged={onPageChanged}
+                           totalItemsCount={totalItemsCount} pageSize={pageSize}
+                           portionSize={portionSize}/>
+            </div>
+
+
+            <div className={s.users}>
+                {users.map((u) => <User user={u} key={u.id}followingInProgress={followingInProgress}
                                         unfollow={unfollowUser} follow={followUser}
                                         setFormControl={setFormControl} setReceiverId={setReceiverId}
-                                        setReceiver={setReceiver} setPhoto={setPhoto}
+                                        setReceiver={setReceiver} setPhoto={setPhoto} isAuth={isAuth}
                     />
                 )}
 
@@ -81,3 +94,5 @@ export const Users: React.FC<PropsType> = (props) => {
         </div>
     );
 };
+
+export const WrappedUsers = withRouter(Users)

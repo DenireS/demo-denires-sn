@@ -1,11 +1,30 @@
 import {FormAction, stopSubmit} from "redux-form";
-import {PhotosType, ProfileType} from "../types/types";
+import {PhotosType, PostType, ProfileType} from "../types/types";
 import {ProfileAPI} from "../api/profile-api";
 import {ResponseResultCodesEnum} from "../api/api";
 import {BaseThunkType, InferActionsTypes} from "./redux-store";
+import {updateObjectinArray} from "../utils/object-helpers";
 
 
 let initialState = {
+    posts: [
+        {
+            id: 1,
+            senderId: 1000,
+            body: 'There is no post API, so all posts are local',
+            addedAt: '00-00-0000',
+            likesCount: 1,
+            views: 1,
+        },
+        {
+            id: 2,
+            senderId: 1000,
+            body: 'There is no post API, so all posts are local',
+            addedAt: '00-00-0000',
+            likesCount: 1,
+            views: 1,
+        },
+    ] as Array<PostType>,
     profile: null as ProfileType | null,
     profileEditStatus: false,
     isFetching: false,
@@ -44,6 +63,18 @@ const profileReducer = (state = initialState, action: ActionsTypes): InitialStat
                 isFetching: action.isFetching
             };
         }
+        case "ADD_POST": {
+            return {
+                ...state,
+                posts: [...state.posts, action.post]
+            }
+        }
+        case "ADD_LIKE": {
+            return {
+                ...state,
+                posts: updateObjectinArray(state.posts, action.postId, 'id', {likesCount: action.likesCount})
+            }
+        }
         default:
             return state;
     }
@@ -69,29 +100,38 @@ export const actions = {
         status,
     } as const),
 
-    editIsFetchingA: (isFetching: boolean) => ({
+    isFetching: (isFetching: boolean) => ({
         type: 'TOGGLE_IS_FETCHING',
         isFetching,
+    } as const),
+    addPost: (post: any) => ({
+        type: 'ADD_POST',
+        post,
+    } as const),
+    addLike: (postId: number, likesCount: number) => ({
+        type: 'ADD_LIKE',
+        postId,
+        likesCount,
     } as const),
 }
 
 export const setProfileEditStatus = (status: boolean): ThunkType => async (dispatch) => {
     dispatch(actions.setProfileEditStatusA(status));
 }
-export const editIsFetching = (isFetching: boolean): ThunkType => async (dispatch) => {
-    dispatch(actions.editIsFetchingA(isFetching));
+export const toggleIsFetching = (isFetching: boolean): ThunkType => async (dispatch) => {
+    dispatch(actions.isFetching(isFetching));
 }
 
 export const getUserProfile = (userId: number): ThunkType => async (dispatch) => {
+    dispatch(actions.isFetching(true));
     let data = await ProfileAPI.getProfile(userId)
     dispatch(actions.setUserProfile(data));
+    dispatch(actions.isFetching(false));
 };
 
 export const getStatus = (userId: number): ThunkType => async (dispatch) => {
     let data = await ProfileAPI.getStatus(userId)
-
     dispatch(actions.setStatus(data));
-
 };
 
 export const updateStatus = (status: string): ThunkType => async (dispatch) => {
@@ -120,14 +160,14 @@ export const saveProfile = (profile: ProfileType): ThunkType => async (dispatch,
 
     if (data.resultCode === ResponseResultCodesEnum.Success) {
         dispatch(actions.setProfileEditStatusA(false))
-        dispatch(actions.editIsFetchingA(false))
+        dispatch(actions.isFetching(false))
         if (userId != null) {
             dispatch(getUserProfile(userId));
         } else {
             throw new Error('userId can`t be null')
         }
     } else if (data.resultCode === ResponseResultCodesEnum.Error) {
-        dispatch(actions.editIsFetchingA(false))
+        dispatch(actions.isFetching(false))
         dispatch(stopSubmit('edit-profile', {_error: data.messages[0]}));
     }
 };

@@ -6,22 +6,25 @@ import {DialogChat} from "./DialogChat";
 import {useSelector} from "react-redux";
 import {getUsers} from "../../redux/dialogs-selectors";
 
-export const Dialogs = (props: any) => {
+type PropsType = {}
+
+export const Dialogs: React.FC<PropsType> = React.memo((props) => {
 
     const users = useSelector(getUsers)
 
-
-    let dialogsElements = users.map((d:any) => (
-        <DialogItem name={d.userName} key={d.id} id={d.id} img={d.photos.small || userPhoto} {...props}/>
+    const dialogsElements = users.map((d: any) => (
+        <DialogItem name={d.userName} key={d.id} id={d.id} img={d.photos.small || userPhoto}
+                    lastDialogActivityDate={d.lastDialogActivityDate} lastUserActivityDate={d.lastUserActivityDate}
+                    newMessagesCount={d.newMessagesCount}/>
     ));
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogs__item}>{dialogsElements}</div>
-            <DialogChat {...props} />
+            <DialogChat users={users} {...props} />
         </div>
 
 
     );
-}
-
+})
 

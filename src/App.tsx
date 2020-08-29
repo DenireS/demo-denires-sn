@@ -49,7 +49,7 @@ const App = () => {
                     <Redirect exact from="/" to="/profile"/>
                     <Route path="/dialogs/:userId?" render={() => <DialogsContainer/>}/>
                     <Route path="/profile/:userId?" render={() => <ProfileWrappedContainer/>}/>
-                    <Route path="/users/:page?" render={() => <UsersPage pageTitle={'samurai'}/>}/>
+                    <Route path="/users/" render={() => <UsersPage/>}/>
                     <Route path="/login" render={() => <LoginPage/>}/>
                     <Route path="*" render={() => <div>404</div>}/>
                 </Switch>

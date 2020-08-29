@@ -13,11 +13,10 @@ import {Preloader} from "../common/Preloader/Preloader";
 import {getCurrentChat, getIsFetching} from "../../redux/dialogs-selectors";
 
 
-const DialogsContainer = (props: any) => {
+const DialogsContainer = React.memo((props: any) => {
 
     const isFetching = useSelector(getIsFetching);
     const currentChat = useSelector(getCurrentChat);
-
     const dispatch = useDispatch();
 
     const refreshDialogs = () => {
@@ -32,6 +31,7 @@ const DialogsContainer = (props: any) => {
             dispatch(requestMessages(userId));
             dispatch(actions.setCurrentChat(userId));
         }
+
     }
 
     useEffect(() => {
@@ -49,7 +49,7 @@ const DialogsContainer = (props: any) => {
         </>
     )
 
-}
+})
 
 
 export default compose<React.ComponentType>(withAuthRedirect, withRouter)(DialogsContainer);

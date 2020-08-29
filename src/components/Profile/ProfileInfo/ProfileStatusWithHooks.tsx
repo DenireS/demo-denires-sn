@@ -1,20 +1,24 @@
 import React, {useState, useEffect, ChangeEvent} from 'react';
 import s from './ProfileInfo.module.css';
-import {updateStatus} from '../../../../redux/profile-reducer';
-import {Preloader} from '../../../common/Preloader/Preloader';
+import {updateStatus} from '../../../redux/profile-reducer';
+import {Preloader} from '../../common/Preloader/Preloader';
 import {useDispatch, useSelector} from "react-redux";
-import {getStatus} from "../../../../redux/profile-selectors";
+import {getStatus} from "../../../redux/profile-selectors";
 
-const ProfileStatusWithHooks: React.FC = () => {
+type PropsType = {
+    status: string
+}
+
+const ProfileStatusWithHooks: React.FC<PropsType> = React.memo(({status}) => {
 
     const statusSelector = useSelector(getStatus)
     const dispatch = useDispatch()
 
     let [editMode, setEditMode] = useState(false);
-    let [status, setStatus] = useState(statusSelector);
+    let [localStatus, setLocalStatus] = useState(statusSelector);
 
     useEffect(() => {
-        setStatus(status);
+        setLocalStatus(status);
     }, [status]);
 
     let activateEditMode = () => {
@@ -23,20 +27,19 @@ const ProfileStatusWithHooks: React.FC = () => {
 
     const deactivateEditMode = () => {
         setEditMode(false);
-        dispatch(updateStatus(status))
+        dispatch(updateStatus(localStatus))
     };
     const onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setStatus(e.currentTarget.value);
+        setLocalStatus(e.currentTarget.value);
     };
 
     return (
-        <div>
+        <div className={s.status}>
             {!editMode && (
-                <div>
-                    <b>Status</b>: <span onDoubleClick={activateEditMode}>
-            {status || '-----'}
+                <span onDoubleClick={activateEditMode}>
+            {localStatus || '-----'}
           </span>
-                </div>
+
             )}
             {editMode && (
                 <div>
@@ -44,12 +47,12 @@ const ProfileStatusWithHooks: React.FC = () => {
                         onChange={onStatusChange}
                         onBlur={deactivateEditMode}
                         autoFocus={true}
-                        value={status}
+                        value={localStatus}
                     ></input>
                 </div>
             )}
         </div>
     );
-};
+})
 
 export default ProfileStatusWithHooks;

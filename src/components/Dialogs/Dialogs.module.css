@@ -1,48 +1,108 @@
 .dialogs {
     display: grid;
-    grid-template-columns: 4fr 8fr;
-    grid-template-areas: 'd c';
+    grid-template-columns: 3fr 9fr;
+    grid-template-areas: 'd c'
 }
 
 .dialogs__item {
-    padding: 10px;
+    height: 92vh;
+    overflow: auto;
     grid-area: d;
+    background-color: #fff;
+}
+
+.dialogs__item a {
+    color: black;
+    text-decoration: none;
 }
 
 .dialog {
+    color: #0000006b;
     display: grid;
-    grid-template-columns: 6fr 6fr;
+    grid-template-columns: 4fr 8fr;
     position: relative;
-    margin-bottom: 20px;
-
+    padding: 10px;
+    transition: color .1s linear,
+    background-color .1s linear;
     grid-template-areas: 'i d';
 }
 
-.dialog a {
-    color: #fff;
-    text-decoration: none;
-    transition: color 0.1s linear;
-    position: absolute;
-    transform: translateY(-50%);
-    top: 50%;
-}
 
-.dialog__name {
+.dialogInfo {
     grid-area: d;
 }
 
-.dialog img {
+.dialogInfo a {
+    position: absolute; /* 2 */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.dialog:hover {
+     color: #fff;
+     background-color: #5682a3;
+ }
+
+.dialogName {
+    color: black;
+    font-size: 16px;
+    transition: color .1s linear;
+}
+
+.dialogName:after {
+    content: '';
+    display: block;
+    border: 1px solid #e7e8ec !important;
+}
+.dialog:hover .dialogName{
+    color: #fff;
+}
+
+.activeLink .dialog {
+    background-color: #5682a3;
+}
+
+.activeLink .lastUserActivityDate {
+    color: #fff;
+}
+
+.activeLink .lastDialogActivityDate {
+    color: #fff;
+}
+
+.activeLink .dialogName {
+    color: #fff;
+}
+
+.activeLink .dialogName:after {
+    content: '';
+    color: white;
+    display: block;
+    border: 1px solid #e7e8ec;
+}
+
+
+.lastDialogActivityDate {
+    font-size: 10px;
+    font-style: italic;
+}
+
+.lastUserActivityDate {
+    font-size: 10px;
+    font-style: italic;
+}
+
+.dialogImg {
     width: 60px;
     grid-area: i;
+    border-radius: 50%;
+    transition: filter .1s linear;
 }
 
-.dialog a:hover {
-    color: gold;
+.dialogImg:hover {
+    filter: opacity(.5) drop-shadow(0 0 0 #1d5d90);
 }
 
-.dialog .activeLink {
-    color: gold;
-}
 
 .messages {
     padding: 10px;

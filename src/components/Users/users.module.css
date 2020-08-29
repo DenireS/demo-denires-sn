@@ -1,4 +1,178 @@
-.userPhoto {
-  width: 100px;
+.usersPage {
+    display: grid;
+    grid-template-areas: 's s' 'u u';
+    border-radius: 5px;
+    width: 75%;
+    background-color: #fff;
+    margin: 20px auto;
+    padding: 10px;
 }
 
+.users {
+    display: flex;
+    flex-direction: column;
+    grid-area: u;
+    overflow: auto;
+    height: 75vh;
+
+}
+
+.utils {
+    grid-area: t;
+}
+
+.user {
+    flex: 1 1 50%;
+    text-align: center;
+}
+
+.userPhoto {
+    width: 120px;
+    transition: filter .1s linear;
+}
+
+.userPhoto:hover {
+    filter: opacity(.5) drop-shadow(0 0 0 #1d5d90);
+}
+
+.userItem {
+    border-top: 1px solid #e7e8ec;
+    width: 65%;
+    display: flex;
+    flex-direction: row;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.userInfo {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    text-align: end;
+    justify-content: space-between;
+}
+
+.searchForm input {
+    width: 250px;
+    border-radius: 2px;
+    border: 1px solid #0000006b;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+.searchForm input:focus {
+    outline: #0000006b;
+}
+
+.searchForm select {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    border-radius: 2px;
+    border: 1px solid #0000006b;
+}
+
+.searchForm select:focus {
+    outline: #0000006b;
+}
+
+.searchForm option:focus {
+    outline: #0000006b;
+}
+
+.searchForm button {
+    background-color: transparent;
+    border-radius: 6px;
+    border: 1px solid #e7e8ec;
+    display: inline-block;
+    cursor: pointer;
+    color: black;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 6px 12px;
+    text-decoration: none;
+    transition: background-color .1s linear,
+    color .1s linear;
+}
+
+.searchForm button:hover {
+    background-color: rgba(137, 160, 179, 0.5);
+    color: #fff;
+}
+
+.searchForm button:focus {
+    outline: #0000006b;
+    border: 1px solid #0000006b;
+}
+
+.searchForm {
+    text-align: center;
+    grid-area: s;
+    margin-bottom: 20px;
+}
+
+
+.paginator {
+    left: 0;
+    width: 100%;
+    position: absolute;
+    bottom: 30px;
+}
+
+.paginator span {
+    margin: 10px;
+}
+
+.paginator:last-child span {
+    margin: 0px;
+}
+
+.button {
+    background-color: transparent;
+    border-radius: 6px;
+    border: 1px solid #e7e8ec;
+    display: inline-block;
+    cursor: pointer;
+    color: black;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 6px 12px;
+    text-decoration: none;
+    transition: background-color .1s linear,
+    color .1s linear;
+}
+
+.button:hover {
+    background-color: rgba(137, 160, 179, 0.5);
+    color: #fff;
+}
+
+.button:focus {
+    outline: #0000006b;
+    border: 1px solid #0000006b;
+}
+
+.button:disabled {
+    background-color: rgba(137, 160, 179, 0.5);
+    color: #0000006b;
+}
+
+.openForm {
+    color: #0000006b;
+    cursor: pointer;
+    transition: color .2s linear;
+}
+
+.openForm:hover {
+    color: #5682a3;
+}
+
+.userName {
+    font-size: 1.1rem;
+    color: black;
+}
+
+.userStatus {
+    font-style: italic;
+    font-size: 0.9rem;
+    color: #0000006b;
+}

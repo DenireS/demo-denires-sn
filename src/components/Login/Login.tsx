@@ -1,13 +1,12 @@
 import React from 'react';
 import s from './Login.module.css';
 import styles from '../common/FormsControls/FormsControls.module.css';
-import {reduxForm, InjectedFormProps} from 'redux-form';
+import {InjectedFormProps, reduxForm} from 'redux-form';
 import {required} from '../../utils/validators/validators';
-import {FormType, createField} from '../common/FormsControls/FormsControls';
-import {connect, useDispatch, useSelector} from 'react-redux';
-import {Logout, Login} from '../../redux/auth-reducer';
+import {createField, FormType} from '../common/FormsControls/FormsControls';
+import {useDispatch, useSelector} from 'react-redux';
+import {Login} from '../../redux/auth-reducer';
 import {Redirect} from 'react-router-dom';
-import {AppStateType} from "../../redux/redux-store";
 import {getCaptchaURL, getIsAuth} from "../../redux/auth-selectors";
 
 const Input = FormType('input');
@@ -58,9 +57,34 @@ export const LoginPage: React.FC = (props) => {
     }
 
     return (
-        <div>
-            <h1>Login</h1>
-            <LoginReduxForm onSubmit={onSubmit} captchaURL={captchaURL}/>
+        <div className={s.loginPage}>
+            <div className={s.loginForm}>
+                <div className={s.loginTitle}>Login</div>
+                <LoginReduxForm onSubmit={onSubmit} captchaURL={captchaURL}/>
+                <a className={s.registrationLink} href={'https://social-network.samuraijs.com/signUp'}
+                   target={'_blank'}>Redirect to registration</a>
+            </div>
+
+
+            <div className={s.siteInfo}>
+                <div className={s.authorInfo}>This app is made by Oleksandr Khalevkyi who learn React and wants to work
+                    on it in the future.
+                    There is a remote server to work with data - <a href={'https://social-network.samuraijs.com'}
+                                                                    target={'_blank'}>https://social-network.samuraijs.com/</a>
+                </div>
+                <div className={s.contactsTitle}>
+                    <div className={s.contacts}>
+                        <div className={s.gitHub}><b className={s.contactName}>GitHub:</b> <a
+                            href={'https://github.com/DenireS'}
+                            target={'_blank'}>https://github.com/DenireS</a>
+                        </div>
+                        <div className={s.gmail}><b className={s.contactName}>Gmail:</b> everlastingmad@gmail.com
+                        </div>
+                        <div className={s.telNum}><b className={s.contactName}>Tel:</b>+380636737016</div>
+                    </div>
+                </div>
+
+            </div>
         </div>
     );
 };

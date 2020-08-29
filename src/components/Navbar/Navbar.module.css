@@ -1,18 +1,49 @@
 .nav {
-	background-color: darkred;
-	padding: 20px;
+    display: block;
+    height: 89.7vh;
+    grid-area: n;
+    padding-right: 15px;
 }
 
 .item a {
-	color: #fff;
-	text-decoration: none;
-	transition: color .1s linear;
+    padding: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #0000006b;
+    text-decoration: none;
+    transition: color .1s linear,
+    background-color .1s linear;
+    margin-bottom: 10px;
+    border-radius: 5px;
 }
 
 .item a:hover {
-	color: gold;
+    color: #fff;
+    background-color: rgba(137, 160, 179, 0.5);
 }
 
 .item a.activeLink {
-	color: gold;
+    color: #fff;
+    background-color: rgba(137, 160, 179, 0.5);
+}
+
+.item a img {
+    width: 24px;
+    vertical-align: middle;
+}
+.item {
+}
+
+.item a {
+    display: grid;
+    grid-template-areas: 'i f';
+    grid-template-columns: 6fr 6fr;
+}
+
+.itemImg {
+    grid-area: i;
+}
+
+.itemInfo {
+    grid-area: f;
 }

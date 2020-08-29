@@ -10,3 +10,8 @@ export const maxLengthCreator = (maxLength: number): FieldValidatorType => (valu
         return `Max length is ${maxLength} symbols`;
     return undefined;
 };
+export const lengthCreator = (length: number): FieldValidatorType => (value) => {
+    if (value && value.length !== length)
+        return `Length is ${length} symbols`;
+    return undefined;
+};

@@ -1,22 +1,57 @@
 .header {
-  position: relative;
-  grid-area: h;
-  background-color: green;
-}
-
-.header img {
-  position: absolute;
-  top: 50%;
-  margin-left: 1rem;
-  transform: translateY(-50%);
-  width: 4rem;
+    position: relative;
+    grid-area: h;
+    background-color: #5682a3;
+    margin-bottom: 15px;
 }
 
 .loginBlock {
-  position: absolute;
-  right: 0;
+    display: flex;
+    margin-top: 8px;
+    justify-content: flex-end;
 }
+
+
+.userName {
+    color: #fff;
+    margin-right: 50px;
+    font-weight: bold;
+}
+
+.authUser {
+    display: flex;
+    margin-right: 25px;
+}
+
+.authUser button,
 .loginBlock a {
-  color: #fff;
-  cursor: pointer;
+    display: block;
+    padding: 6px 12px;
+    cursor: pointer;
+    background-color: #fff;
+    border-radius: 6px;
+    border: 1px solid #e7e8ec;
+    color: black;
+    font-size: 12px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color .1s linear,
+    color .1s linear;
+}
+
+.authUser button:hover,
+.loginBlock a:hover {
+    background-color: rgba(137, 160, 179, 0.5);
+    color: #fff;
+}
+
+.authUser button:focus,
+.loginBlock a:focus {
+    outline: #0000006b;
+    border: 1px solid #0000006b;
+}
+
+.loginBlock a {
+    display: inline-block;
+    margin-right: 25px;
 }

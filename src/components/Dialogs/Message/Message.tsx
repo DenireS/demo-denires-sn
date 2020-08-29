@@ -1,88 +1,118 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import s from '../DialogChat.module.css';
 import {formattedDate, formattedTime} from "../../common/DateControls/DateControls";
 import classNames from 'classnames'
+import userPhoto from '../../../assets/images/User.jpg';
+import {DialogsUserType, UsersType} from "../../../types/types";
+
 
 type PropsType = {
-    senderId:number
+    senderId: number
     authUserId: number | null
     message: string
     senderName: string
-    id: number
-    date: string | number
+    id: string
+    date: string
     viewed: boolean
     recipientId: number
+    authUserInfo: any
+    deleteMessage: (id: string) => void
 
-    restoreChatMessage: (id:number)=> void
-    deleteChatMessage: (id:number)=> void
 }
 
-export const Message:React.FC<PropsType>=(props) =>{
-    let [restore, setRestore] = useState(false)
-    let [messageId, setMessageId] = useState(null)
-    let [deleted, setDeleted] = useState('messageBody')
-    let [fullMessage, setFullMessage] = useState('message')
+export const Message: React.FC<PropsType> = React.memo((props) => {
 
-    let deleteMessage = (id:any) => {
-        setMessageId(id)
-        setRestore(true)
-        setDeleted('deleted')
-    }
-    let restoreMessage = () => {
-        props.restoreChatMessage(props.id)
-        setRestore(false)
-        setDeleted('messageBody')
-    }
-    let confirmDeleting = () => {
-        props.deleteChatMessage(props.id)
-        setRestore(false)
+    const [fullMessage, setFullMessage] = useState('message')
+    const [messageStateClass, setMessageStateClass] = useState(true)
+
+
+    const hideDeleteMessage = (messageId: string) => {
         setFullMessage('messageDeleted')
+        props.deleteMessage(messageId)
     }
 
+    const selectMessage = (id: number) => {
+        setMessageStateClass(!messageStateClass)
+        if (messageStateClass) {
+            setFullMessage('messageSelected')
+        } else {
+            setFullMessage('')
+        }
+    }
 
-    // let date = formattedDate(props.date)
     let time = formattedTime(props.date)
+
+
     return (<>
 
-            <div className={s[fullMessage]}>
-                {props.senderId == props.authUserId
-                    ? <div className={s.messageSend}>
-                        <span className={classNames(s[deleted], s.send)}>
-                            <span>{props.message}</span>
-                            <span className={s.messageTime}>{time}</span>
+            <div className={classNames(s.message, s[fullMessage])}>
 
-                            <div className={s.btn}>
-                                {!restore && <span onClick={() => deleteMessage(props.id)}>🗑</span>}
-                            </div>
-                        </span>
-                        {restore && <div className={s.confirmDeleting}>
-                            <div>Are you ready</div>
-                            <button className={s.restore} onClick={() => restoreMessage()}>Restore</button>
-                            <button className={s.restore} onClick={() => confirmDeleting()}>Delete</button>
-                        </div>}
-                    </div>
-                    : <div className={s.messageReceived}>
-                        <span className={classNames(s[deleted], s.received)}>
-                            <span>{props.message}</span>
-                            <span className={s.messageTime}>{time}</span>
+                {props.id == undefined ? <span className={s.splitDate}>{props.message}</span>
+                    :
+                    props.senderId == props.authUserId
+                        ? <div className={s.messageSend}>
 
-                            <div className={s.btn}>
-                                {!restore && <span onClick={() => deleteMessage(props.id)}>🗑</span>}
+                            <div className={classNames(s.messageBody, s.send)}>
+
+                                <div className={s.messageContainer}>
+                                    <div className={s.text}>{props.message}</div>
+                                    <div className={s.utils}>
+                                        <span className={classNames(s.messageTime, s.send)}>{time}</span>
+
+                                        {props.viewed == false ?
+                                            <span className={s.check}/>
+                                            : <span className={classNames(s.check, s.viewed)}/>
+                                        }
+
+                                    </div>
+                                </div>
+
+
                             </div>
+                            {fullMessage == 'messageSelected' ? <div className={s.btnContainer}>
+                                    <button className={s.deleteBtn}
+                                            onClick={() => hideDeleteMessage(props.id)}>Delete
+                                    </button>
+                                </div>
+                                : null}
+                            {/*@ts-ignore*/}
+                            <div onClick={() => selectMessage(props.id)} className={s.setMessageBtn}>
+                                <div className={s.setMessageBtnInner}>
+                                </div>
+                            </div>
+                        </div>
+                        : <div className={s.messageReceived}>
+                            <span className={classNames(s.messageBody, s.received)}>
+
+                                <div className={s.messageContainer}>
+                                    <div className={s.text}>{props.message}</div>
+                                    <div className={s.utils}>
+                                        <span className={classNames(s.messageTime, s.received)}>{time}</span>
+                                    </div>
+                                </div>
+
                             </span>
-                        {restore && <div className={s.confirmDeleting}>
-                            <div>Are you ready</div>
-                            <button className={s.restore} onClick={() => restoreMessage()}>Restore</button>
-                            <button className={s.restore} onClick={() => confirmDeleting()}>Delete</button>
-                        </div>}
 
-                    </div>}
+                            {fullMessage == 'messageSelected' ? <div>
+                                    <button className={classNames(s.deleteBtn, s.btnReceived)}
+                                            onClick={() => hideDeleteMessage(props.id)}>Delete
+                                    </button>
+                                </div>
+                                : null}
+                            {/*@ts-ignore*/}
+                            <div onClick={() => selectMessage(props.id)}
+                                 className={classNames(s.setMessageBtn, s.setMessageBtnReceived)}>
+                                <div className={s.setMessageBtnInner}>
+                                </div>
+                            </div>
+
+                        </div>
+                }
 
 
             </div>
-            {/*<div className={s.messageDate}>{date}</div>*/}
 
         </>
     );
-}
+})
 

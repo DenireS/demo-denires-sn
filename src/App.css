@@ -1,50 +1,57 @@
 body, html {
     width: 100%;
     height: 100%;
+    background-color: #edeef0;
+}
+
+textarea {
+    resize: none;
 }
 
 .app-wrapper {
     margin: 0 auto;
     display: grid;
     width: 1200px;
+    height: 100vh;
+    position: relative;
 
     grid-template-areas: 'h h' 'n c';
 
     grid-template-rows: 60px 1fr;
-    grid-template-columns: 2fr 10fr;
+    grid-template-columns: 2fr 15fr;
 }
-
-.UserMessageFormWindow {
-    left: 0;
-    top: 0;
-    width: 100vw;
-    height: 100vh;
-    background: red; /* А это работает */
-    background: rgba(255, 0, 0, 0.5);
-    position: fixed;
-    z-index: 1000;
-}
-
-.UserMessageForm {
-    top: 50%;
-    left: 50%;
-    opacity: 1;
-    position: fixed;
-    width: 300px;
-    height: 200px;
-    background: grey;
-}
-.UserMessageFormTitle {
-    display: flex;
-    flex: 1 1 0;
-}
-
-.UserMessageFormImg {
-    width: 100px;
-}
-
 
 .app-wrapper__content {
+    position: relative;
     grid-area: c;
-    background-color: #7f7fd0;
+}
+
+::-webkit-scrollbar-button {
+    background-repeat: no-repeat;
+    width: 5px;
+    height: 0px
+}
+
+::-webkit-scrollbar-track {
+    background-color: #ecedee
+}
+
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+    background-color: rgba(137, 160, 179, 0.5);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #5682a3;
+}
+
+::-webkit-resizer {
+    background-repeat: no-repeat;
+    width: 4px;
+    height: 0px
+}
+
+::-webkit-scrollbar {
+    width: 4px;
 }

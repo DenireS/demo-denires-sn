@@ -1,13 +1,12 @@
 import React, {useEffect} from 'react';
-import s from './Profile.module.css';
-import {
-    getUserProfile,
-    getStatus,
-} from '../../redux/profile-reducer';
+import {getStatus, getUserProfile,} from '../../redux/profile-reducer';
 import {Profile} from './Profile';
 import {useDispatch, useSelector} from 'react-redux';
-import {withRouter, RouteComponentProps} from 'react-router-dom';
+import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {getAuthorizedUserId} from "../../redux/auth-selectors";
+import {getIsFetching} from "../../redux/profile-selectors";
+import {Preloader} from "../common/Preloader/Preloader";
+import {WrappedUsers} from "../Users/Users";
 
 type PathParamsType = {
     userId: string
@@ -15,9 +14,8 @@ type PathParamsType = {
 type PropsType = RouteComponentProps<PathParamsType>;
 
 const ProfileContainer: React.FC<PropsType> = (props) => {
-
     const authorizedUserId = useSelector(getAuthorizedUserId)
-
+    const isFetching = useSelector(getIsFetching)
     const dispatch = useDispatch();
 
     const refreshProfile = () => {
@@ -31,8 +29,8 @@ const ProfileContainer: React.FC<PropsType> = (props) => {
         if (!userId) {
             console.log('Id should exists in URL para,s or in state (`authorizedUserId`)')
         } else {
-            dispatch(getUserProfile(userId));
             dispatch(getStatus(userId));
+            dispatch(getUserProfile(userId));
         }
     }
 
@@ -45,11 +43,11 @@ const ProfileContainer: React.FC<PropsType> = (props) => {
     }, [props.match.params.userId])
 
 
-    return (
-        <div>
-            <Profile isOwner={!props.match.params.userId}/>
-        </div>
-    );
+    return <>
+        {isFetching ? <Preloader/> : null}
+        <Profile isOwner={!props.match.params.userId}/>
+    </>
+
 }
 
 

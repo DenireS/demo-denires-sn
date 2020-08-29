@@ -1,10 +1,44 @@
 .pages {
-  font-size: 25px;
-  color: #fff;
+    font-size: 20px;
+    color: #0000006b;
 }
 
 .selectedPage {
-  font-weight: bold;
-  color: gold;
+    font-weight: bold;
+    color: #5682a3;
 }
 
+.paginator {
+    border-radius: 5px;
+    background-color: #fff;
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    margin: 0 auto;
+    width: 75%;
+    padding: 10px;
+}
+
+.nextBtn:before {
+    right: 10px;
+    position: absolute;
+    content: '';
+    border-right: 3px solid #0000006b;
+    border-bottom: 3px solid #0000006b;
+    width: 24px;
+    height: 24px;
+    transform: translateY(-50%) rotate(-45deg);
+    top: 50%;
+}
+
+.prevBtn:before {
+    left: 10px;
+    position: absolute;
+    content: '';
+    border-left: 3px solid #0000006b;
+    border-top: 3px solid #0000006b;
+    width: 24px;
+    height: 24px;
+    transform: translateY(-50%) rotate(-45deg);
+    top: 50%;
+}

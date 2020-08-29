@@ -1,0 +1,282 @@
+.profilePage {
+    display: grid;
+    grid-template-areas: 'i d';
+    grid-auto-columns: 5fr 7fr;
+}
+
+textarea,
+input {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    border-radius: 3px;
+}
+
+.profileShape {
+    grid-area: i;
+}
+
+.mainPhoto {
+    width: 360px;
+}
+
+.goToEditMode {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: transparent;
+    border-radius: 6px;
+    border: 1px solid #e7e8ec;
+    display: inline-block;
+    cursor: pointer;
+    color: black;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 6px 12px;
+    text-decoration: none;
+    transition: background-color .1s linear,
+    color .1s linear;
+}
+
+.goToEditMode:hover {
+    background-color: rgba(137, 160, 179, 0.5);
+    color: #fff;
+}
+
+.goToEditMode:focus {
+    outline: #0000006b;
+    border: 1px solid #0000006b;
+}
+
+.profilePage button:disabled {
+    position: absolute;
+    right: 0;
+    top: 0;
+    border-radius: 6px;
+    border: 1px solid #e7e8ec;
+    display: inline-block;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 6px 12px;
+    text-decoration: none;
+    background-color: rgba(137, 160, 179, 0.5);
+    color: #0000006b;
+}
+
+
+.profileInfo {
+    position: relative;
+    grid-area: d;
+}
+
+.profileDataForm {
+    border-radius: 5px;
+    padding: 15px;
+    background-color: #fff;
+    opacity: 0;
+    transition: 1s;
+    animation: show .2s 1;
+    animation-fill-mode: forwards; /* Чтобы элемент оставался в конечном состоянии анимации */
+    animation-delay: 0.1s; /* Задержка перед началом */
+}
+
+.profileDataForm textarea {
+    width: 150%;
+    height: 70px;
+    border: 1px solid #e7e8ec;
+}
+
+.profileDataForm textarea:focus {
+    outline: #0000006b;
+    border: 1px solid #0000006b;
+}
+
+.profileDataForm input {
+    width: 198%;
+    border: 1px solid #e7e8ec;
+}
+
+.profileDataForm input:focus {
+    outline: #0000006b;
+    border: 1px solid #0000006b;
+}
+
+
+@keyframes show {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.profileData {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 15px;
+    opacity: 0;
+    transition: 1s;
+    animation: show2 .2s 1;
+    animation-fill-mode: forwards; /* Чтобы элемент оставался в конечном состоянии анимации */
+    animation-delay: 0.1s; /* Задержка перед началом */
+}
+
+@keyframes show2 {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.fullName {
+    font-size: 40px;
+}
+
+.status {
+    font-size: 20px;
+    font-style: italic;
+    margin-bottom: 15px;
+}
+
+.status:after {
+    content: '';
+    color: white;
+    display: block;
+    border: 1px solid #e7e8ec;
+}
+
+.contactsMenu {
+    margin-top: 15px;
+}
+
+.passive {
+    display: none;
+}
+
+.active {
+    display: block;
+}
+
+
+.contactsTitle {
+    cursor: pointer;
+    text-align: center;
+    margin-bottom: 15px;
+    transition: background-color .1s linear,
+    color .1s linear;
+}
+
+.contactsTitle:hover {
+    background-color: rgba(137, 160, 179, 0.5);
+    color: #fff;
+}
+
+.contactsMenu:before {
+    content: '';
+    color: white;
+    display: block;
+    border: 1px solid #e7e8ec;
+    cursor: pointer;
+}
+
+.contact {
+    display: flex;
+}
+
+.dataTitle {
+    color: #0000006b;
+    width: 35%;
+}
+
+.dataText {
+    overflow-wrap: break-word;
+    max-width: 300px;
+    margin-bottom: 15px;
+}
+
+
+.lookingForAJob {
+    display: flex;
+}
+
+.mySkills {
+    display: flex;
+}
+
+.aboutMe {
+    display: flex;
+}
+
+.active .dataTitle {
+    margin-bottom: 0px;
+}
+
+.fullNameForm {
+    margin-top: 30px;
+    display: flex;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.buttonUpload {
+    display: block;
+    padding: 6px 12px;
+    cursor: pointer;
+    background-color: transparent;
+    border-radius: 6px;
+    border: 1px solid #e7e8ec;
+    color: black;
+    font-size: 12px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color .1s linear,
+    color .1s linear;
+}
+
+.buttonUpload:hover {
+    background-color: rgba(137, 160, 179, 0.5);
+    color: #fff;
+}
+
+.buttonUpload:focus {
+    outline: #0000006b;
+    border: 1px solid #0000006b;
+}
+
+.profileShapeInfo {
+    width: 360px;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.openMessageForm {
+    display: block;
+    padding: 6px 12px;
+    cursor: pointer;
+    background-color: transparent;
+    border-radius: 6px;
+    border: 1px solid #e7e8ec;
+    color: black;
+    font-size: 12px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color .1s linear,
+    color .1s linear;
+}
+
+.openMessageForm:hover {
+    background-color: rgba(137, 160, 179, 0.5);
+    color: #fff;
+}
+
+.openMessageForm:focus {
+    outline: #0000006b;
+    border: 1px solid #0000006b;
+}
