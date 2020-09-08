@@ -19,7 +19,7 @@
 }
 
 .loginTitle {
-    font-size: 20px;
+    font-size: 1.5rem;
     font-weight: bold;
     margin-bottom: 10px;
 }
@@ -34,7 +34,7 @@
     border-radius: 6px;
     border: 1px solid #e7e8ec;
     color: black;
-    font-size: 12px;
+    font-size: 0.75rem;
     font-weight: bold;
     text-decoration: none;
     transition: background-color .1s linear,
@@ -74,23 +74,37 @@
     border-color: #5682a3;;
 }
 
-.loginForm a {
-    margin-top: 15px;
-}
 
 .loginForm input {
+    width: 250px;
     border-radius: 3px;
     border: 1px solid #e7e8ec;
-    font-size: 15px;
+    font-size: 1rem;
+    margin-bottom: 5px;
 }
 
-.loginForm input:first-child {
-    margin-bottom: 5px;
+.loginForm input[name="rememberMe"] {
+    width: 0.9rem;
+}
+
+.loginForm form div:nth-child(3) {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 30px;
+}
+
+.loginForm :nth-child(3) span {
+    display: block;
+    font-size: 1rem;
 }
 
 .loginForm input:focus {
     outline: #0000006b;
     border: 1px solid #0000006b;
+}
+
+.loginForm a {
+    margin-top: 15px;
 }
 
 .authorInfo {
@@ -129,4 +143,15 @@
     color: #0000006b;
     width: 35%;
     margin-bottom: 15px;
+}
+
+@media (max-width: 575px) {
+    .loginPage {
+        grid-template-areas: 'f f' 'i i';
+    }
+
+    .loginForm input {
+        width: 100%;
+
+    }
 }

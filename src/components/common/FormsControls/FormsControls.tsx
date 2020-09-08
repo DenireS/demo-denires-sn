@@ -13,7 +13,7 @@ export function createField<FormKeysType extends string>(placeholder: string | u
                 component={component}
                 validate={validators}
                 {...props}
-            /> {text}
+            /> <span>{text}</span>
         </div>
     )
 }

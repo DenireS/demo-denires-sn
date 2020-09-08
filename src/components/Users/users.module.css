@@ -2,7 +2,7 @@
     display: grid;
     grid-template-areas: 's s' 'u u';
     border-radius: 5px;
-    width: 75%;
+    width: 85%;
     background-color: #fff;
     margin: 20px auto;
     padding: 10px;
@@ -13,8 +13,7 @@
     flex-direction: column;
     grid-area: u;
     overflow: auto;
-    height: 75vh;
-
+    margin-bottom: 70px;
 }
 
 .utils {
@@ -86,7 +85,7 @@
     display: inline-block;
     cursor: pointer;
     color: black;
-    font-size: 12px;
+    font-size: 0.75rem;
     font-weight: bold;
     padding: 6px 12px;
     text-decoration: none;
@@ -133,7 +132,7 @@
     display: inline-block;
     cursor: pointer;
     color: black;
-    font-size: 12px;
+    font-size: 0.75rem;
     font-weight: bold;
     padding: 6px 12px;
     text-decoration: none;

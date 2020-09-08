@@ -1,7 +1,14 @@
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
 body, html {
     width: 100%;
     height: 100%;
     background-color: #edeef0;
+    font-size: 16px;
 }
 
 textarea {
@@ -9,22 +16,75 @@ textarea {
 }
 
 .app-wrapper {
+    width: 100%;
+    max-width: 1205px;
+    padding: 0 15px;
     margin: 0 auto;
-    display: grid;
-    width: 1200px;
     height: 100vh;
     position: relative;
-
-    grid-template-areas: 'h h' 'n c';
-
-    grid-template-rows: 60px 1fr;
-    grid-template-columns: 2fr 15fr;
 }
 
 .app-wrapper__content {
     position: relative;
-    grid-area: c;
+    padding-top: 60px;
+    margin-left: 150px;
 }
+
+@media (max-width: 1200px) {
+    .app-wrapper {
+        max-width: 970px;
+    }
+
+    body, html {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 990px) {
+    .app-wrapper {
+        max-width: 750px;
+    }
+
+    .app-wrapper__content {
+        margin-left: 0;
+    }
+
+    body, html {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 770px) {
+    .app-wrapper {
+        max-width: none;
+    }
+
+    body, html {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 575px) {
+
+    body, html {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 375px) {
+
+    body, html {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 300px) {
+
+    body, html {
+        font-size: 10px;
+    }
+}
+
 
 ::-webkit-scrollbar-button {
     background-repeat: no-repeat;

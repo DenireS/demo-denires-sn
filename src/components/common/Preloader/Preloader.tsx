@@ -5,7 +5,6 @@ export const Preloader: React.FC = () => {
     return <div className={s.ldsDualRingContainer}>
         <div className={s.ldsDualRing}>
         </div>
-        ;
     </div>
 
 }

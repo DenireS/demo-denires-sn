@@ -1,8 +1,33 @@
 .header {
-    position: relative;
+    position: fixed;
     grid-area: h;
     background-color: #5682a3;
-    margin-bottom: 15px;
+    height: 45px;
+    z-index: 7;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 1175px;
+    margin: 0 auto;
+}
+
+@media (max-width: 1200px) {
+    .header {
+        max-width: 940px;
+    }
+}
+
+@media (max-width: 990px) {
+    .header {
+        max-width: 720px;
+    }
+
+}
+
+@media (max-width: 770px) {
+    .header {
+        max-width: none;
+    }
 }
 
 .loginBlock {
@@ -32,7 +57,7 @@
     border-radius: 6px;
     border: 1px solid #e7e8ec;
     color: black;
-    font-size: 12px;
+    font-size: 0.75rem;
     font-weight: bold;
     text-decoration: none;
     transition: background-color .1s linear,

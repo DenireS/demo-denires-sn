@@ -15,9 +15,6 @@ input {
     grid-area: i;
 }
 
-.mainPhoto {
-    width: 360px;
-}
 
 .goToEditMode {
     position: absolute;
@@ -29,7 +26,7 @@ input {
     display: inline-block;
     cursor: pointer;
     color: black;
-    font-size: 12px;
+    font-size: 0.75rem;
     font-weight: bold;
     padding: 6px 12px;
     text-decoration: none;
@@ -55,7 +52,7 @@ input {
     border: 1px solid #e7e8ec;
     display: inline-block;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 0.75rem;
     font-weight: bold;
     padding: 6px 12px;
     text-decoration: none;
@@ -67,7 +64,9 @@ input {
 .profileInfo {
     position: relative;
     grid-area: d;
+    max-width: 625px;
 }
+
 
 .profileDataForm {
     border-radius: 5px;
@@ -81,18 +80,22 @@ input {
 }
 
 .profileDataForm textarea {
-    width: 150%;
-    height: 70px;
+    font-size: 1rem;
+    width: 300px;
+    height: 75px;
     border: 1px solid #e7e8ec;
+    transition: height .1s linear;
 }
 
 .profileDataForm textarea:focus {
     outline: #0000006b;
     border: 1px solid #0000006b;
+    height: 150px;
 }
 
 .profileDataForm input {
-    width: 198%;
+    font-size: 1rem;
+    width: 300px;
     border: 1px solid #e7e8ec;
 }
 
@@ -132,13 +135,15 @@ input {
 }
 
 .fullName {
-    font-size: 40px;
+    font-size: 2.5rem;
+    overflow-wrap: break-word;
 }
 
 .status {
-    font-size: 20px;
+    font-size: 1.3rem;
     font-style: italic;
     margin-bottom: 15px;
+    overflow-wrap: break-word;
 }
 
 .status:after {
@@ -189,6 +194,7 @@ input {
 .dataTitle {
     color: #0000006b;
     width: 35%;
+    margin-right: 20px;
 }
 
 .dataText {
@@ -223,6 +229,9 @@ input[type="file"] {
     display: none;
 }
 
+input[name="lookingForAJob"] {
+}
+
 .buttonUpload {
     display: block;
     padding: 6px 12px;
@@ -231,7 +240,7 @@ input[type="file"] {
     border-radius: 6px;
     border: 1px solid #e7e8ec;
     color: black;
-    font-size: 12px;
+    font-size: 0.75rem;
     font-weight: bold;
     text-decoration: none;
     transition: background-color .1s linear,
@@ -249,11 +258,17 @@ input[type="file"] {
 }
 
 .profileShapeInfo {
-    width: 360px;
+    width: 400px;
     background-color: #fff;
     border-radius: 5px;
     padding: 15px;
     margin: 0 auto;
+    text-align: center;
+}
+
+.mainPhoto {
+    width: 360px;
+    border-radius: 5px;
 }
 
 .openMessageForm {
@@ -264,7 +279,7 @@ input[type="file"] {
     border-radius: 6px;
     border: 1px solid #e7e8ec;
     color: black;
-    font-size: 12px;
+    font-size: 0.75rem;
     font-weight: bold;
     text-decoration: none;
     transition: background-color .1s linear,
@@ -279,4 +294,237 @@ input[type="file"] {
 .openMessageForm:focus {
     outline: #0000006b;
     border: 1px solid #0000006b;
+}
+
+@media (max-width: 1200px) {
+    .profileDataForm input {
+        font-size: 0.9rem;
+        max-width: 250px;
+    }
+
+    .profileDataForm textarea {
+        font-size: 0.9rem;
+        max-width: 250px;
+    }
+
+    .profileInfo {
+        position: relative;
+        grid-area: d;
+        max-width: 475px;
+    }
+
+    .profileShapeInfo {
+        width: 300px;
+        padding: 10px;
+    }
+
+    .dataText {
+        max-width: 250px;
+
+    }
+
+    .mainPhoto {
+        width: 280px;
+        border-radius: 5px;
+    }
+}
+
+@media (max-width: 990px) {
+    .profileDataForm textarea {
+        width: 270px;
+    }
+
+    .profileInfo {
+        position: relative;
+        grid-area: d;
+        max-width: 440px;
+    }
+
+    .profileDataForm input {
+        width: 270px;
+    }
+
+    .profileShapeInfo {
+        width: 270px;
+        padding: 10px;
+        margin: 0;
+    }
+
+    .mainPhoto {
+        width: 250px;
+        border-radius: 5px;
+    }
+
+}
+
+@media (max-width: 770px) {
+    .profilePage {
+        display: block;
+    }
+
+    .profileInfo {
+        max-width: 770px;
+    }
+
+    .profileShapeInfo {
+        position: absolute;
+        z-index: 5;
+        display: flex;
+    }
+
+    .profileData {
+        margin-left: 0px;
+    }
+
+
+    .profileDataForm {
+        margin-left: 0px;
+        z-index: 6;
+        position: inherit;
+    }
+
+    .lookingForAJob {
+        border-top: 1px solid #e7e8ec;
+        padding-top: 5px;
+    }
+
+    .dataTitle {
+        min-width: 35%;
+    }
+
+    .dataText {
+        max-width: 400px;
+        min-width: 100px;
+    }
+
+    .status {
+        margin-left: 240px;
+        margin-bottom: 170px;
+    }
+
+    .fullName {
+        margin-left: 240px;
+    }
+
+    .mainPhoto {
+        width: 230px;
+    }
+
+    .profileShapeInfo {
+        width: 250px;
+    }
+
+    .openMessageForm,
+    .buttonUpload {
+        align-self: flex-end;
+        display: inline-block;
+        text-align: center;
+        padding: 10px 15px;
+        border-radius: 6px;
+        margin-left: 10px;
+        word-wrap: normal;
+        white-space: nowrap;
+    }
+
+
+    .profileDataForm .mySkills {
+        display: block;
+        margin-top: 20px;
+    }
+
+    .profileDataForm .aboutMe {
+        display: block;
+        margin-top: 20px;
+    }
+
+    .profileDataForm .contact {
+        display: block;
+        margin-top: 10px;
+    }
+
+    .profileDataForm .fullNameForm {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .profileDataForm textarea {
+        width: 100%;
+        max-width: 100%;
+        font-size: 1rem;
+        height: 70px;
+    }
+
+    .profileDataForm input {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 575px) {
+
+    .mainPhoto {
+        width: 170px;
+    }
+
+    .profileShapeInfo {
+        width: 190px;
+    }
+
+    .dataText {
+        max-width: 300px;
+    }
+
+    .status {
+        margin-left: 180px;
+        margin-bottom: 120px;
+    }
+
+    .fullName {
+        margin-left: 180px;
+    }
+
+    .openMessageForm,
+    .buttonUpload {
+        padding: 5px 10px;
+    }
+}
+
+@media (max-width: 375px) {
+
+    .mainPhoto {
+        width: 140px;
+    }
+
+    .profileShapeInfo {
+        width: 160px;
+    }
+
+    .status {
+        margin-left: 145px;
+        margin-bottom: 85px;
+    }
+
+    .fullName {
+        margin-left: 145px;
+    }
+}
+
+@media (max-width: 300px) {
+
+    .mainPhoto {
+        width: 130px;
+    }
+
+    .profileShapeInfo {
+        width: 150px;
+    }
+
+    .status {
+        margin-left: 135px;
+        margin-bottom: 85px;
+    }
+
+    .fullName {
+        margin-left: 135px;
+    }
 }

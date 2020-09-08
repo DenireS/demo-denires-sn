@@ -1,11 +1,14 @@
 .dialogs {
     display: grid;
     grid-template-columns: 3fr 9fr;
-    grid-template-areas: 'd c'
+    grid-template-areas: 'd c';
+    height: 100vh;
+    padding-top: 60px;
+    margin-top: -60px;
+    padding-bottom: 20px;
 }
 
 .dialogs__item {
-    height: 92vh;
     overflow: auto;
     grid-area: d;
     background-color: #fff;
@@ -39,13 +42,13 @@
 }
 
 .dialog:hover {
-     color: #fff;
-     background-color: #5682a3;
- }
+    color: #fff;
+    background-color: #5682a3;
+}
 
 .dialogName {
     color: black;
-    font-size: 16px;
+    font-size: 1rem;
     transition: color .1s linear;
 }
 
@@ -54,7 +57,8 @@
     display: block;
     border: 1px solid #e7e8ec !important;
 }
-.dialog:hover .dialogName{
+
+.dialog:hover .dialogName {
     color: #fff;
 }
 
@@ -83,12 +87,12 @@
 
 
 .lastDialogActivityDate {
-    font-size: 10px;
+    font-size: 0.6rem;
     font-style: italic;
 }
 
 .lastUserActivityDate {
-    font-size: 10px;
+    font-size: 0.6rem;
     font-style: italic;
 }
 
