@@ -116,9 +116,9 @@
 
     position: fixed;
     top: 8px;
-    left: 40px;
     z-index: 8;
     outline: 0;
+    margin-left: 25px;
 }
 
 .nav_toggle__item {
@@ -180,10 +180,11 @@
         position: fixed;
         display: block;
         top: 44px;
-        left: 15px;
-        right: 15px;
         background-color: rgba(137, 160, 179, 0.9);
         z-index: 11;
+        width: 100%;
+        max-width: 720px;
+        margin: 0 auto;
     }
 
     .nav.active .item {
@@ -210,5 +211,10 @@
 @media (max-width: 770px) {
     .nav.active .item a {
         font-size: 1.5rem;
+    }
+
+    .nav.active {
+        max-width: 100%;
+        left: 0;
     }
 }

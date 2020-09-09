@@ -11,24 +11,6 @@
     margin: 0 auto;
 }
 
-@media (max-width: 1200px) {
-    .header {
-        max-width: 940px;
-    }
-}
-
-@media (max-width: 990px) {
-    .header {
-        max-width: 720px;
-    }
-
-}
-
-@media (max-width: 770px) {
-    .header {
-        max-width: none;
-    }
-}
 
 .loginBlock {
     display: flex;
@@ -38,6 +20,7 @@
 
 
 .userName {
+    align-self: center;
     color: #fff;
     margin-right: 50px;
     font-weight: bold;
@@ -79,4 +62,27 @@
 .loginBlock a {
     display: inline-block;
     margin-right: 25px;
+}
+
+@media (max-width: 1200px) {
+    .header {
+        max-width: 940px;
+    }
+}
+
+@media (max-width: 990px) {
+    .header {
+        max-width: 720px;
+    }
+
+    .userName {
+        margin-right: 20px;
+    }
+
+}
+
+@media (max-width: 770px) {
+    .header {
+        max-width: none;
+    }
 }
