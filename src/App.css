@@ -27,7 +27,7 @@ textarea {
 .app-wrapper__content {
     position: relative;
     padding-top: 60px;
-    margin-left: 150px;
+    margin-left: 140px;
 }
 
 @media (max-width: 1200px) {
@@ -50,7 +50,7 @@ textarea {
     }
 
     body, html {
-        font-size: 15px;
+        font-size: 14px;
     }
 }
 

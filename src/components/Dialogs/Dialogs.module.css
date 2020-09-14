@@ -119,3 +119,123 @@
 .post {
     margin-top: 20px;
 }
+
+.toggleItems {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 100px;
+    z-index: 10;
+    transition: left 0.2s linear;
+}
+
+.toggleItems:before {
+    right: 10px;
+    position: absolute;
+    content: '';
+    border-right: 3px solid #0000006b;
+    border-bottom: 3px solid #0000006b;
+    width: 24px;
+    height: 24px;
+    transform: translateY(-50%) rotate(-45deg);
+    top: 50%;
+    z-index: 11;
+}
+
+.toggleItemsActive {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 300px;
+    z-index: 10;
+    transition: left 0.2s linear;
+}
+
+.toggleItemsActive:before {
+    left: 10px;
+    position: absolute;
+    content: '';
+    border-left: 3px solid #0000006b;
+    border-top: 3px solid #0000006b;
+    width: 24px;
+    height: 24px;
+    transform: translateY(-50%) rotate(-45deg);
+    top: 50%;
+    z-index: 11;
+}
+
+
+@media (max-width: 1200px) {
+    .dialogs {
+        grid-template-columns: 3.5fr 8.5fr;
+
+    }
+
+    .dialogImg {
+        width: 50px;
+    }
+}
+
+@media (max-width: 990px) {
+
+}
+
+@media (max-width: 770px) {
+    .dialogs {
+        display: block;
+    }
+
+    .dialogs__item {
+        overflow: auto;
+        grid-area: d;
+        background-color: #fff;
+        width: 70px;
+        position: absolute;
+        height: 93vh;
+        z-index: 9;
+        overflow-x: hidden;
+        transition: width 0.2s linear;
+    }
+
+    .dialogs__item .dialogInfo {
+        display: none;
+        visibility: hidden;
+    }
+
+    .dialogInfo {
+        grid-area: d;
+        margin-left: 20px;
+    }
+
+    .dialogs__item.active {
+        width: 300px;
+    }
+
+    .dialogs__item.active .dialogInfo {
+        height: 0;
+        display: block;
+        visibility: visible;
+        width: 200px;
+    }
+
+    .dialog {
+        grid-template-columns: 1fr 11fr;
+        padding: 5px;
+
+    }
+
+    .lastDialogActivityDate,
+    .lastUserActivityDate {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 575px) {
+}
+
+@media (max-width: 375px) {
+
+}
+
+@media (max-width: 300px) {
+}

@@ -69,7 +69,7 @@ export const Message: React.FC<PropsType> = React.memo((props) => {
 
 
                             </div>
-                            {fullMessage == 'messageSelected' ? <div className={s.btnContainer}>
+                            {fullMessage == 'messageSelected' ? <div>
                                     <button className={s.deleteBtn}
                                             onClick={() => hideDeleteMessage(props.id)}>Delete
                                     </button>
