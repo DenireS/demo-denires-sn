@@ -3,7 +3,7 @@ import {HashRouter, Redirect, Route, Switch, withRouter} from 'react-router-dom'
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import {UsersPage} from './components/Users/UsersContainer';
-import {ProfileWrappedContainer} from './components/Profile/ProfileContainer';
+import {ProfileWrappedContainer} from './components/Profile/Profile';
 import {LoginPage} from "./components/Login/Login";
 import {HeaderPage} from "./components/Header/Header";
 import {Provider, useDispatch, useSelector} from 'react-redux';
