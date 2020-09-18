@@ -13,9 +13,9 @@
     background-color: #fff;
     display: flex;
     position: relative;
-    justify-content: space-between;
+    justify-content: center;
     margin: 0 auto;
-    width: 75%;
+    width: 50%;
     padding: 10px;
 }
 
@@ -42,3 +42,62 @@
     transform: translateY(-50%) rotate(-45deg);
     top: 50%;
 }
+
+@media (max-width: 1200px) {
+    .paginator {
+        width: 60%;
+
+    }
+}
+
+@media (max-width: 990px) {
+    .paginator {
+        width: 65%;
+    }
+}
+
+@media (max-width: 770px) {
+    .paginator {
+        width: 80%;
+    }
+}
+
+@media (max-width: 575px) {
+    .paginator {
+        width: 90%;
+        padding: 5px;
+    }
+}
+@media (max-width: 480px) {
+    .paginator {
+        width: 100%;
+        padding: 5px;
+    }
+    .paginator span {
+        margin: 6px;
+    }
+    .nextBtn:before {
+        width: 18px;
+        height: 18px;
+    }
+
+    .prevBtn:before {
+        width: 18px;
+        height: 18px;
+    }
+}
+@media (max-width: 375px) {
+    .paginator span {
+        margin: 3px;
+    }
+    .nextBtn:before {
+        width: 18px;
+        height: 18px;
+    }
+
+    .prevBtn:before {
+        width: 18px;
+        height: 18px;
+    }
+}
+

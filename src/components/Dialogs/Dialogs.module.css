@@ -1,6 +1,6 @@
 .dialogs {
     display: grid;
-    grid-template-columns: 3fr 9fr;
+    grid-template-columns: 3fr 10fr;
     grid-template-areas: 'd c';
     height: 100vh;
     padding-top: 60px;
@@ -28,6 +28,10 @@
     transition: color .1s linear,
     background-color .1s linear;
     grid-template-areas: 'i d';
+}
+
+.dialog.unread {
+    background-color: #d5d5d5;
 }
 
 
@@ -96,6 +100,10 @@
     font-style: italic;
 }
 
+.newMessagesCount {
+
+}
+
 .dialogImg {
     width: 60px;
     grid-area: i;
@@ -121,6 +129,7 @@
 }
 
 .toggleItems {
+    display: none;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -164,7 +173,6 @@
     z-index: 11;
 }
 
-
 @media (max-width: 1200px) {
     .dialogs {
         grid-template-columns: 3.5fr 8.5fr;
@@ -195,6 +203,10 @@
         z-index: 9;
         overflow-x: hidden;
         transition: width 0.2s linear;
+    }
+
+    .toggleItems {
+        display: block;
     }
 
     .dialogs__item .dialogInfo {
@@ -231,11 +243,78 @@
 }
 
 @media (max-width: 575px) {
+    .dialogs__item.active {
+        width: 270px;
+    }
+
+    .toggleItemsActive {
+        left: 270px;
+    }
+
+    .dialogs__item.active .dialogInfo {
+        width: 170px;
+    }
+}
+
+@media (max-width: 480px) {
+    .dialogs__item {
+        width: 0;
+    }
+
+    .toggleItems {
+        left: 30px;
+    }
+
+    .dialogs__item.active {
+        width: 300px;
+    }
+
+    .toggleItemsActive {
+        left: 300px;
+    }
+
+    .dialogs__item.active .dialogInfo {
+        width: 200px;
+    }
+
+    .dialogName {
+        font-size: 1.2rem;
+    }
+
+
 }
 
 @media (max-width: 375px) {
+    .dialogs__item.active {
+        width: 250px;
+    }
+
+    .toggleItemsActive {
+        left: 250px;
+    }
+
+    .dialogs__item.active .dialogInfo {
+        width: 150px;
+    }
+
 
 }
 
-@media (max-width: 300px) {
+@media (max-width: 320px) {
+    .dialogs__item.active {
+        width: 230px;
+    }
+
+    .toggleItemsActive {
+        left: 230px;
+    }
+
+    .dialogs__item.active .dialogInfo {
+        width: 130px;
+    }
+
+    .dialogName {
+        font-size: 1.3rem;
+    }
+
 }

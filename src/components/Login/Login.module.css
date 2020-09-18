@@ -144,8 +144,7 @@
     width: 35%;
     margin-bottom: 15px;
 }
-
-@media (max-width: 575px) {
+@media (max-width: 770px) {
     .loginPage {
         grid-template-areas: 'f f' 'i i';
     }
@@ -154,4 +153,9 @@
         width: 100%;
 
     }
+}
+
+
+@media (max-width: 575px) {
+
 }

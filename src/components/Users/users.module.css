@@ -175,3 +175,44 @@
     font-size: 0.9rem;
     color: #0000006b;
 }
+
+@media (max-width: 990px) {
+    .usersPage {
+        width: 100%;
+    }
+}
+
+@media (max-width: 770px) {
+    .userItem {
+        width: 80%;
+    }
+}
+
+@media (max-width: 575px) {
+    .userItem {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .userItem {
+        width: 100%;
+    }
+
+    .searchForm input {
+        width: 150px;
+    }
+}
+
+@media (max-width: 375px) {
+
+    .searchForm input {
+        width: 120px;
+    }
+
+    .searchForm button {
+        font-weight: normal;
+        padding: 4px 100px;
+        margin-top: 10px;
+    }
+}

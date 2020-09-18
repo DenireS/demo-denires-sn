@@ -1,9 +1,9 @@
 import React, {ChangeEvent, SetStateAction, useState} from 'react';
 import s from './ProfileInfo.module.css';
 import {Preloader} from '../../common/Preloader/Preloader';
-import ProfileStatusWithHooks from './ProfileStatusWithHooks';
+import {ProfileStatus} from './ProfileStatus';
 import userPhoto from '../../../assets/images/User.jpg';
-import ProfileDataForm from "./ProfileDataForm";
+import {ProfileDataReduxForm} from "./ProfileDataForm";
 import {AddMessageUserFormRedux} from "../../common/MessageForm/UsersMessageForm";
 import {ContactsType, ProfileType} from "../../../types/types";
 import {useDispatch, useSelector} from "react-redux";
@@ -76,8 +76,8 @@ export const ProfileInfo: React.FC<PropsType> = React.memo(({isOwner}) => {
             </div>
             <div className={s.profileInfo}>
                 {profileEditStatus
-                    ? <ProfileDataForm initialValues={profile} profile={profile} onSubmit={onSubmit}
-                                       isFetching={isFetching}/>
+                    ? <ProfileDataReduxForm initialValues={profile} profile={profile} onSubmit={onSubmit}
+                                            isFetching={isFetching}/>
                     :
                     <ProfileData profile={profile} isOwner={isOwner}
                                  goToEditMode={goToEditMode} status={status}/>}
@@ -109,7 +109,7 @@ const ProfileData: React.FC<ProfileDataPropsType> = ({profile, isOwner, goToEdit
             <div className={s.fullName}>
                 {profile.fullName}
             </div>
-            <ProfileStatusWithHooks status={status}/>
+            <ProfileStatus status={status}/>
             <div className={s.lookingForAJob}>
                 <b className={s.dataTitle}>Looking for a job:</b> <span
                 className={s.dataText}>{profile.lookingForAJob ? 'yes' : 'no'}</span>

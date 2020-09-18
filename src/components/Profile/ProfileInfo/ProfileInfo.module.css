@@ -509,7 +509,7 @@ input[name="lookingForAJob"] {
     }
 }
 
-@media (max-width: 300px) {
+@media (max-width: 320px) {
 
     .mainPhoto {
         width: 130px;

@@ -116,7 +116,7 @@
 
     position: fixed;
     top: 8px;
-    z-index: 8;
+    z-index: 13;
     outline: 0;
     margin-left: 25px;
 }
@@ -181,7 +181,7 @@
         display: block;
         top: 44px;
         background-color: rgba(137, 160, 179, 0.9);
-        z-index: 11;
+        z-index: 13;
         width: 100%;
         max-width: 720px;
         margin: 0 auto;
@@ -189,6 +189,7 @@
 
     .nav.active .item {
         display: block;
+        width: 720px;
     }
 
     .nav.active .item a {
@@ -216,5 +217,9 @@
     .nav.active {
         max-width: 100%;
         left: 0;
+    }
+
+    .nav.active .item {
+        width: 760px;
     }
 }

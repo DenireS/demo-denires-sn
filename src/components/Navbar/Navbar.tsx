@@ -1,8 +1,6 @@
 import React, {useState} from 'react';
 import s from './Navbar.module.css';
 import {NavLink} from 'react-router-dom';
-import {useSelector} from "react-redux";
-import {getSideBarStatus} from "../../redux/sidebar-selectors";
 import home from '../../assets/icons/home.png'
 import messages from '../../assets/icons/messages.png'
 import users from '../../assets/icons/users.png'
@@ -11,7 +9,6 @@ import classNames from "classnames";
 
 const Navbar = () => {
 
-    const sideBarStatus = useSelector(getSideBarStatus)
     const [state, setState] = useState(true)
     const [navbar, setNavbar] = useState('')
     const [navToggle, setNavToggle] = useState("")

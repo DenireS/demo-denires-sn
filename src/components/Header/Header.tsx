@@ -15,8 +15,6 @@ export const HeaderPage: React.FC = (props) => {
     const LogoutUser = () => {
         dispatch(Logout())
     }
-
-
     return (
         <header className={s.header}>
             <div className={s.loginBlock}>

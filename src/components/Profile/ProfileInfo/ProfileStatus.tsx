@@ -1,7 +1,6 @@
-import React, {useState, useEffect, ChangeEvent} from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 import s from './ProfileInfo.module.css';
 import {updateStatus} from '../../../redux/profile-reducer';
-import {Preloader} from '../../common/Preloader/Preloader';
 import {useDispatch, useSelector} from "react-redux";
 import {getStatus} from "../../../redux/profile-selectors";
 
@@ -9,7 +8,7 @@ type PropsType = {
     status: string
 }
 
-const ProfileStatusWithHooks: React.FC<PropsType> = React.memo(({status}) => {
+export const ProfileStatus: React.FC<PropsType> = React.memo(({status}) => {
 
     const statusSelector = useSelector(getStatus)
     const dispatch = useDispatch()
@@ -54,5 +53,3 @@ const ProfileStatusWithHooks: React.FC<PropsType> = React.memo(({status}) => {
         </div>
     );
 })
-
-export default ProfileStatusWithHooks;

@@ -8,7 +8,7 @@ import {FilterType, follow, requestUsers, unfollow} from "../../redux/users-redu
 import {useDispatch, useSelector} from "react-redux";
 import {
     getCurrentPage,
-    getFollowingInProgress,
+    getFollowingInProgress, getIsFetching,
     getPageSize,
     getPortionSize,
     getTotalItemsCount,
@@ -16,14 +16,12 @@ import {
     getUsersFilter
 } from "../../redux/users-selectors";
 import {sendUserMessage} from "../../redux/dialogs-reducer";
-import {RouteComponentProps, withRouter, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import {getIsAuth} from "../../redux/auth-selectors";
 import * as queryString from "querystring";
+import {Preloader} from "../common/Preloader/Preloader";
 
-type PathParamsType = {
-    userId: string
-}
-type PropsType = RouteComponentProps<PathParamsType>;
+type PropsType = {}
 
 type QueryParamsType = { term?: string, page?: string, friend?: string };
 
@@ -42,6 +40,7 @@ export const Users: React.FC<PropsType> = (props) => {
     const followingInProgress = useSelector(getFollowingInProgress);
     const filter = useSelector(getUsersFilter);
     const isAuth = useSelector(getIsAuth);
+    const isFetching = useSelector(getIsFetching)
 
     const dispatch = useDispatch()
     const history = useHistory()
@@ -89,7 +88,6 @@ export const Users: React.FC<PropsType> = (props) => {
         dispatch(unfollow(id))
     };
     const onPageChanged = (pageNumber: number) => {
-        // @ts-ignore
         dispatch(requestUsers(pageNumber, pageSize, filter))
     };
     const onFilterChanged = (filter: FilterType) => {
@@ -100,36 +98,35 @@ export const Users: React.FC<PropsType> = (props) => {
         values.newMessageBody = null;
     };
 
-    return (
+    return (<>
+            {isFetching ? <Preloader/> : null}
+            <div className={s.usersPage}>
+                <div className={s.searchForm}>
+                    <UsersSearchForm onFilterChanged={onFilterChanged}/>
+                </div>
 
-        <div className={s.usersPage}>
-            <div className={s.searchForm}>
-                <UsersSearchForm onFilterChanged={onFilterChanged}/>
+                <div className={s.paginator}>
+                    <Paginator currentPage={currentPage} onPageChanged={onPageChanged}
+                               totalItemsCount={totalItemsCount} pageSize={pageSize}
+                               portionSize={portionSize}/>
+                </div>
+
+
+                <div className={s.users}>
+                    {users.map((u) => <User user={u} key={u.id} followingInProgress={followingInProgress}
+                                            unfollow={unfollowUser} follow={followUser}
+                                            setFormControl={setFormControl} setReceiverId={setReceiverId}
+                                            setReceiver={setReceiver} setPhoto={setPhoto} isAuth={isAuth}
+                        />
+                    )}
+
+                </div>
+                {formControl
+                    ?
+                    <AddMessageUserFormRedux onSubmit={addNewMessage} photo={photo} receiver={receiver}
+                                             setFormControl={setFormControl}/>
+                    : null}
             </div>
-
-            <div className={s.paginator}>
-                <Paginator currentPage={currentPage} onPageChanged={onPageChanged}
-                           totalItemsCount={totalItemsCount} pageSize={pageSize}
-                           portionSize={portionSize}/>
-            </div>
-
-
-            <div className={s.users}>
-                {users.map((u) => <User user={u} key={u.id} followingInProgress={followingInProgress}
-                                        unfollow={unfollowUser} follow={followUser}
-                                        setFormControl={setFormControl} setReceiverId={setReceiverId}
-                                        setReceiver={setReceiver} setPhoto={setPhoto} isAuth={isAuth}
-                    />
-                )}
-
-            </div>
-            {formControl
-                ?
-                <AddMessageUserFormRedux onSubmit={addNewMessage} photo={photo} receiver={receiver}
-                                         setFormControl={setFormControl}/>
-                : null}
-        </div>
+        </>
     );
 };
-
-export const WrappedUsers = withRouter(Users)

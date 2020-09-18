@@ -6,30 +6,38 @@ import {
 } from '../../redux/dialogs-reducer';
 import {Dialogs} from './Dialogs';
 import {useDispatch, useSelector} from 'react-redux';
-import {Redirect, withRouter} from 'react-router-dom';
+import {Redirect, useHistory, useParams, withRouter} from 'react-router-dom';
 import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 import {compose} from 'redux';
 import {Preloader} from "../common/Preloader/Preloader";
 import {getCurrentChat, getIsFetching} from "../../redux/dialogs-selectors";
 
+type PropsType = {
+    isAuth: boolean
+}
+type ParamsType = {
+    userId: string | undefined
+}
 
-const DialogsContainer = React.memo((props: any) => {
+const DialogsContainer: React.FC<PropsType> = React.memo((props) => {
 
     const isFetching = useSelector(getIsFetching);
     const currentChat = useSelector(getCurrentChat);
     const dispatch = useDispatch();
+    const history = useHistory()
+    const params = useParams<ParamsType>()
 
     const refreshDialogs = () => {
         if (!props.isAuth) return <Redirect to={'/login'}/>;
-        let userId = props.match.params.userId;
+        let userId = params.userId;
         dispatch(requestDialogs())
         if (!userId) {
             if (currentChat) {
-                props.history.push(`/dialogs/${currentChat}`);
+                history.push(`/dialogs/${currentChat}`);
             }
         } else {
-            dispatch(requestMessages(userId));
-            dispatch(actions.setCurrentChat(userId));
+            dispatch(requestMessages(+userId));
+            dispatch(actions.setCurrentChat(+userId));
         }
 
     }
@@ -40,7 +48,7 @@ const DialogsContainer = React.memo((props: any) => {
 
     useEffect(() => {
         refreshDialogs()
-    }, [props.match.params.userId])
+    }, [params.userId])
 
     return (
         <>
@@ -52,4 +60,4 @@ const DialogsContainer = React.memo((props: any) => {
 })
 
 
-export default compose<React.ComponentType>(withAuthRedirect, withRouter)(DialogsContainer);
+export default compose<React.ComponentType>(withAuthRedirect)(DialogsContainer);
