@@ -5,6 +5,7 @@
     grid-area: n;
     padding-right: 15px;
     top: 70px;
+    z-index: 2;
 }
 
 

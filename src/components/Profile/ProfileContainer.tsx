@@ -5,8 +5,8 @@ import {useHistory, useParams} from 'react-router-dom';
 import {getAuthorizedUserId} from "../../redux/auth-selectors";
 import {getIsFetching} from "../../redux/profile-selectors";
 import {Preloader} from "../common/Preloader/Preloader";
-import s from "./Profile.module.css";
-import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
+import s from "./ProfileContainer.module.css";
+import {Profile} from "./ProfileInfo/Profile";
 
 
 type PropsType = {}
@@ -14,7 +14,7 @@ type ParamsType = {
     userId: string | undefined
 }
 
-export const Profile: React.FC<PropsType> = (props) => {
+export const ProfileContainer: React.FC<PropsType> = (props) => {
     const authorizedUserId = useSelector(getAuthorizedUserId)
     const isFetching = useSelector(getIsFetching)
     const dispatch = useDispatch();
@@ -50,7 +50,7 @@ export const Profile: React.FC<PropsType> = (props) => {
     return <>
         {isFetching ? <Preloader/> : null}
         <div className={s.profilePage}>
-            <ProfileInfo isOwner={!params.userId} {...props} />
+            <Profile isOwner={!params.userId} {...props} />
         </div>
     </>
 

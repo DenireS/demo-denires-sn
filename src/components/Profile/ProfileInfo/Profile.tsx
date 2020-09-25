@@ -17,7 +17,7 @@ type PropsType = {
     isOwner: boolean
 }
 
-export const ProfileInfo: React.FC<PropsType> = React.memo(({isOwner}) => {
+export const Profile: React.FC<PropsType> = React.memo(({isOwner}) => {
 
     const profile = useSelector(getProfile)
     const profileEditStatus = useSelector(getProfileEditStatus)
