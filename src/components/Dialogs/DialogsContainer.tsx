@@ -1,12 +1,8 @@
 import React, {useEffect} from 'react';
-import {
-    actions,
-    requestDialogs,
-    requestMessages,
-} from '../../redux/dialogs-reducer';
+import {actions, requestDialogs, requestMessages,} from '../../redux/dialogs-reducer';
 import {Dialogs} from './Dialogs';
 import {useDispatch, useSelector} from 'react-redux';
-import {Redirect, useHistory, useParams, withRouter} from 'react-router-dom';
+import {Redirect, useHistory, useParams} from 'react-router-dom';
 import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 import {compose} from 'redux';
 import {Preloader} from "../common/Preloader/Preloader";
