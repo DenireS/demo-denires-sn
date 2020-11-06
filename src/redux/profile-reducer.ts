@@ -11,15 +11,7 @@ let initialState = {
         {
             id: 1,
             senderId: 1000,
-            body: 'There is no post API, so all posts are local',
-            addedAt: '00-00-0000',
-            likesCount: 1,
-            views: 1,
-        },
-        {
-            id: 2,
-            senderId: 1000,
-            body: 'skillsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssskillsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss',
+            body: 'There is no post API, so all posts are local and hard-coded',
             addedAt: '00-00-0000',
             likesCount: 1,
             views: 1,

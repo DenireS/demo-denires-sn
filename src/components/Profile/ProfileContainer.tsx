@@ -31,7 +31,7 @@ export const ProfileContainer: React.FC<PropsType> = (props) => {
             }
         }
         if (!userId) {
-            console.log('Id should exists in URL para,s or in state (`authorizedUserId`)')
+            console.log('Id should exists in URL params or in state (`authorizedUserId`)')
         } else {
             dispatch(getStatus(userId));
             dispatch(getUserProfile(userId));

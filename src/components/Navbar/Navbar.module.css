@@ -11,7 +11,7 @@
 
 .item a {
     padding: 5px;
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: bold;
     color: #0000006b;
     text-decoration: none;
@@ -60,7 +60,7 @@
 }
 
 /* Navigation */
-.nav__link {
+.navLink {
     display: inline-block;
     vertical-align: top;
     margin: 0 15px;
@@ -72,7 +72,7 @@
     transition: color .2s linear;
 }
 
-.nav__link:after {
+.navLink:after {
     content: '';
     display: block;
     width: 100%;
@@ -89,21 +89,21 @@
     transition: opacity .1s linear;
 }
 
-.nav__link:hover {
+.navLink:hover {
     color: #fce38a;
 }
 
-.nav__link:hover:after,
-.nav__link.active:after {
+.navLink:hover:after,
+.navLink.active:after {
     opacity: 1;
 }
 
-.nav__link.active {
+.navLink.active {
     color: #fce38a;
 }
 
 /* Nav toggle */
-.nav_toggle {
+.navToggle {
     padding: 10px 0;
     width: 30px;
     display: none;
@@ -122,7 +122,7 @@
     margin-left: 25px;
 }
 
-.nav_toggle__item {
+.navToggleItem {
     position: absolute;
     display: block;
     margin: auto;
@@ -132,12 +132,12 @@
     transition: background .2s linear;
 }
 
-.nav_toggle.active .nav_toggle__item {
+.navToggle.active .navToggleItem {
     background: none;
 }
 
-.nav_toggle__item:before,
-.nav_toggle__item:after {
+.navToggleItem:before,
+.navToggleItem:after {
     position: absolute;
     content: "";
     left: 0;
@@ -150,26 +150,26 @@
     transition: transform .2s linear;
 }
 
-.nav_toggle__item:before {
+.navToggleItem:before {
     top: -8px;
 }
 
-.nav_toggle__item:after {
+.navToggleItem:after {
     bottom: -8px;
 }
 
-.nav_toggle.active .nav_toggle__item:before {
+.navToggle.active .navToggleItem:before {
     transform-origin: left top;
     transform: rotate(45deg) translate3d(0, -2px, 0);
 }
 
-.nav_toggle.active .nav_toggle__item:after {
+.navToggle.active .navToggleItem:after {
     transform-origin: left bottom;
     transform: rotate(-45deg) translate3d(0, 3px, 0);;
 }
 
 @media (max-width: 990px) {
-    .nav_toggle {
+    .navToggle {
         display: block;
     }
 
@@ -198,7 +198,7 @@
         font-size: 1rem;
     }
 
-    .nav__link {
+    .navLink {
         display: block;
         margin: 0;
         padding: 8px 20px;

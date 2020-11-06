@@ -8,13 +8,13 @@
     padding-bottom: 20px;
 }
 
-.dialogs__item {
+.dialogsItem {
     overflow: auto;
     grid-area: d;
     background-color: #fff;
 }
 
-.dialogs__item a {
+.dialogsItem a {
     color: black;
     text-decoration: none;
 }
@@ -193,7 +193,7 @@
         display: block;
     }
 
-    .dialogs__item {
+    .dialogsItem {
         overflow: auto;
         grid-area: d;
         background-color: #fff;
@@ -209,7 +209,7 @@
         display: block;
     }
 
-    .dialogs__item .dialogInfo {
+    .dialogsItem .dialogInfo {
         display: none;
         visibility: hidden;
     }
@@ -219,11 +219,12 @@
         margin-left: 20px;
     }
 
-    .dialogs__item.active {
+    .dialogsItem.active {
         width: 300px;
+        background-color: rgba(255, 255, 255, 0.5)
     }
 
-    .dialogs__item.active .dialogInfo {
+    .dialogsItem.active .dialogInfo {
         height: 0;
         display: block;
         visibility: visible;
@@ -243,7 +244,7 @@
 }
 
 @media (max-width: 575px) {
-    .dialogs__item.active {
+    .dialogsItem.active {
         width: 270px;
     }
 
@@ -251,13 +252,13 @@
         left: 270px;
     }
 
-    .dialogs__item.active .dialogInfo {
+    .dialogsItem.active .dialogInfo {
         width: 170px;
     }
 }
 
 @media (max-width: 480px) {
-    .dialogs__item {
+    .dialogsItem {
         width: 0;
     }
 
@@ -265,16 +266,16 @@
         left: 30px;
     }
 
-    .dialogs__item.active {
-        width: 300px;
+    .dialogsItem.active {
+        width: 100%;
     }
 
     .toggleItemsActive {
-        left: 300px;
+        left: 90%;
     }
 
-    .dialogs__item.active .dialogInfo {
-        width: 200px;
+    .dialogsItem.active .dialogInfo {
+        width: 85%;
     }
 
     .dialogName {
@@ -285,32 +286,23 @@
 }
 
 @media (max-width: 375px) {
-    .dialogs__item.active {
-        width: 250px;
+    .dialogsItem.active {
+        width: 100%;
     }
 
     .toggleItemsActive {
-        left: 250px;
+        left: 85%;
     }
-
-    .dialogs__item.active .dialogInfo {
-        width: 150px;
-    }
-
 
 }
 
 @media (max-width: 320px) {
-    .dialogs__item.active {
-        width: 230px;
+    .dialogsItem.active {
+        width: 100%;
     }
 
     .toggleItemsActive {
-        left: 230px;
-    }
-
-    .dialogs__item.active .dialogInfo {
-        width: 130px;
+        left: 80%;
     }
 
     .dialogName {

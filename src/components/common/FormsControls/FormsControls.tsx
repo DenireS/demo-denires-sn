@@ -5,6 +5,7 @@ import {FieldValidatorType} from "../../../utils/validators/validators";
 
 export function createField<FormKeysType extends string>(placeholder: string | undefined, name: FormKeysType, validators: Array<FieldValidatorType>,
                                                          component: string | React.ReactNode, props?: any, text = '') {
+
     return (
         <div>
             <Field
@@ -29,6 +30,7 @@ type FormControlPropsType = {
 type FormControlType = (params: FormControlPropsType) => React.ReactNode
 
 export const FormType = (Element: string): FormControlType => ({input, meta: {touched, error}, type, ...props}) => {
+
 
     let hasError = touched && error;
 

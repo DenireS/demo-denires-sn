@@ -6,12 +6,23 @@ import messages from '../../assets/icons/messages.png'
 import users from '../../assets/icons/users.png'
 import login from '../../assets/icons/login.png'
 import classNames from "classnames";
+import {useDispatch, useSelector} from "react-redux";
+import {getIsAuth} from "../../redux/auth-selectors";
+import {Logout} from '../../redux/auth-reducer';
 
 const Navbar = () => {
+
+    const isAuth = useSelector(getIsAuth)
+    const dispatch = useDispatch()
 
     const [state, setState] = useState(true)
     const [navbar, setNavbar] = useState('')
     const [navToggle, setNavToggle] = useState("")
+
+
+    const logoutUser = () => {
+        dispatch(Logout())
+    }
 
     const toggleMenu = (state: boolean) => {
         if (state) {
@@ -47,16 +58,21 @@ const Navbar = () => {
                     </NavLink>
                 </div>
                 <div className={s.item}>
-                    <NavLink to="/login" activeClassName={s.activeLink}>
-                        <div className={s.itemImg}><img src={login}/></div>
-                        <div className={s.itemInfo}>Login</div>
-                    </NavLink>
+                    {!isAuth ? <NavLink to="/login" activeClassName={s.activeLink}>
+                            <div className={s.itemImg}><img src={login}/></div>
+                            <div className={s.itemInfo}>Login</div>
+                        </NavLink>
+                        : <NavLink onClick={() => logoutUser()} to="/login">
+                            <div className={s.itemImg}><img src={login}/></div>
+                            <div className={s.itemInfo}>Logout</div>
+                        </NavLink>}
+
                 </div>
 
             </nav>
-            <button onClick={() => toggleMenu(state)} className={classNames(s.nav_toggle, s[navToggle])}
+            <button onClick={() => toggleMenu(state)} className={classNames(s.navToggle, s[navToggle])}
                     type="button">
-                <span className={s.nav_toggle__item}>Menu</span>
+                <span className={s.navToggleItem}>Menu</span>
             </button>
 
         </>
