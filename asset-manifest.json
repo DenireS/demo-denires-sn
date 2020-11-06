@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/demo-denires-sn/static/css/main.e22cdc6d.chunk.css",
-    "main.js": "/demo-denires-sn/static/js/main.5a5e0524.chunk.js",
-    "main.js.map": "/demo-denires-sn/static/js/main.5a5e0524.chunk.js.map",
+    "main.css": "/demo-denires-sn/static/css/main.2f1f3660.chunk.css",
+    "main.js": "/demo-denires-sn/static/js/main.3aa76c7e.chunk.js",
+    "main.js.map": "/demo-denires-sn/static/js/main.3aa76c7e.chunk.js.map",
     "runtime-main.js": "/demo-denires-sn/static/js/runtime-main.2da08905.js",
     "runtime-main.js.map": "/demo-denires-sn/static/js/runtime-main.2da08905.js.map",
     "static/css/2.ecffae5e.chunk.css": "/demo-denires-sn/static/css/2.ecffae5e.chunk.css",
-    "static/js/2.6a55893f.chunk.js": "/demo-denires-sn/static/js/2.6a55893f.chunk.js",
-    "static/js/2.6a55893f.chunk.js.map": "/demo-denires-sn/static/js/2.6a55893f.chunk.js.map",
+    "static/js/2.d7e5a02e.chunk.js": "/demo-denires-sn/static/js/2.d7e5a02e.chunk.js",
+    "static/js/2.d7e5a02e.chunk.js.map": "/demo-denires-sn/static/js/2.d7e5a02e.chunk.js.map",
     "index.html": "/demo-denires-sn/index.html",
-    "precache-manifest.a2bf90a4ef4df72f346092b356ef3c5a.js": "/demo-denires-sn/precache-manifest.a2bf90a4ef4df72f346092b356ef3c5a.js",
+    "precache-manifest.21a7c55593493f4d0a16655c24940e3d.js": "/demo-denires-sn/precache-manifest.21a7c55593493f4d0a16655c24940e3d.js",
     "service-worker.js": "/demo-denires-sn/service-worker.js",
     "static/css/2.ecffae5e.chunk.css.map": "/demo-denires-sn/static/css/2.ecffae5e.chunk.css.map",
-    "static/css/main.e22cdc6d.chunk.css.map": "/demo-denires-sn/static/css/main.e22cdc6d.chunk.css.map",
-    "static/js/2.6a55893f.chunk.js.LICENSE.txt": "/demo-denires-sn/static/js/2.6a55893f.chunk.js.LICENSE.txt",
+    "static/css/main.2f1f3660.chunk.css.map": "/demo-denires-sn/static/css/main.2f1f3660.chunk.css.map",
+    "static/js/2.d7e5a02e.chunk.js.LICENSE.txt": "/demo-denires-sn/static/js/2.d7e5a02e.chunk.js.LICENSE.txt",
     "static/media/SadSmile.png": "/demo-denires-sn/static/media/SadSmile.772a8269.png",
-    "static/media/User.jpg": "/demo-denires-sn/static/media/User.a4c1f699.jpg",
+    "static/media/User.jpg": "/demo-denires-sn/static/media/User.1897f975.jpg",
     "static/media/heart.png": "/demo-denires-sn/static/media/heart.ff6e6871.png",
     "static/media/users.png": "/demo-denires-sn/static/media/users.c0f48dda.png",
     "static/media/view.png": "/demo-denires-sn/static/media/view.4187fc2a.png"
@@ -23,8 +23,8 @@
   "entrypoints": [
     "static/js/runtime-main.2da08905.js",
     "static/css/2.ecffae5e.chunk.css",
-    "static/js/2.6a55893f.chunk.js",
-    "static/css/main.e22cdc6d.chunk.css",
-    "static/js/main.5a5e0524.chunk.js"
+    "static/js/2.d7e5a02e.chunk.js",
+    "static/css/main.2f1f3660.chunk.css",
+    "static/js/main.3aa76c7e.chunk.js"
   ]
 }
