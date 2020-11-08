@@ -1,9 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import s from '../DialogChat.module.css';
-import {formattedDate, formattedTime} from "../../../common/DateControls/DateControls";
+import {formattedTime} from "../../../common/DateControls/DateControls";
 import classNames from 'classnames'
-import userPhoto from '../../../../assets/images/User.jpg';
-import {DialogsUserType, UsersType} from "../../../../types/types";
 
 
 type PropsType = {

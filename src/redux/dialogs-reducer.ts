@@ -3,6 +3,7 @@ import {BaseThunkType, InferActionsTypes} from "./redux-store";
 import {FormAction} from "redux-form";
 import {DialogsUserType, MessagesType} from "../types/types";
 import {removeByAttr} from "../components/common/removeByAttr/removeByAttr";
+import {ResponseResultCodesEnum} from "../api/api";
 
 
 let initialState = {
@@ -69,6 +70,12 @@ export const dialogsReducer = (state = initialState, action: ActionsTypes): Init
                 messages: removeByAttr(state.messages, 'id', action.messageId)
             }
         }
+        case "ADD_MESSAGE": {
+            return {
+                ...state,
+                messages: [action.message, ...state.messages]
+            }
+        }
 
         default:
             return state;
@@ -108,24 +115,31 @@ export const actions = {
         type: 'DELETE_MESSAGE',
         messageId,
     } as const),
+    addNewMessage: (message: MessagesType) => ({
+        type: 'ADD_MESSAGE',
+        message,
+    } as const),
 
 }
-
 
 export const sendMessage = (id: number, body: any): ThunkType =>
     async (dispatch) => {
         let response = await DialogsAPI.sendMessage(id, body)
-        dispatch(requestMessages(id))
+        if (response.resultCode === ResponseResultCodesEnum.Success) {
+            dispatch(actions.addNewMessage(response.data.message))
+        } else {
+            throw new Error('message cannot be sent')
+        }
     }
 
 export const sendUserMessage = (id: number, body: any): ThunkType =>
     async (dispatch) => {
         let response = await DialogsAPI.sendMessage(id, body)
-    }
-
-export const startChatting = (id: number): ThunkType =>
-    async (dispatch) => {
-        let response = await DialogsAPI.getChatting(id)
+        if (response.resultCode === ResponseResultCodesEnum.Success) {
+            dispatch(actions.addNewMessage(response.data.message))
+        } else {
+            throw new Error('message cannot be sent')
+        }
     }
 
 export const requestMessages = (id: number): ThunkType =>
@@ -153,15 +167,13 @@ export const requestDialogs = (): ThunkType =>
 
 export const deleteMessage = (messageId: string): ThunkType =>
     async (dispatch) => {
-        dispatch(actions.deleteMessage(messageId))
-        let respone = await DialogsAPI.deleteMessage(messageId);
+        let response = await DialogsAPI.deleteMessage(messageId);
+        if (response.resultCode === ResponseResultCodesEnum.Success) {
+            dispatch(actions.deleteMessage(messageId))
+        } else {
+            throw new Error('message cannot be deleted')
+        }
     }
-
-export const restoreMessage = (messageId: string): ThunkType =>
-    async (dispatch) => {
-        let respone = await DialogsAPI.restoreMessage(messageId);
-    }
-
 
 export default dialogsReducer;
 

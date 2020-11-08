@@ -18,7 +18,7 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormValuesType, LoginFormOwnTyp
             {createField<LoginFormValuesTypeKeys>('Password', 'password', [required], Input, {type: 'password'})}
             {createField<LoginFormValuesTypeKeys>(undefined, 'rememberMe', [], Input, {type: 'checkbox'}, 'Remember Me')}
             {error && <div className={styles.formSummaryError}>{error}</div>}
-            {captchaURL && <img src={captchaURL}/>}
+            {captchaURL && <img alt={''} src={captchaURL}/>}
             {captchaURL && createField<LoginFormValuesTypeKeys>('Write correct symbols', 'captcha', [required], Input)}
 
             <div>
@@ -62,20 +62,23 @@ export const LoginPage: React.FC = (props) => {
                 <div className={s.loginTitle}>Login</div>
                 <LoginReduxForm onSubmit={onSubmit} captchaURL={captchaURL}/>
                 <a className={s.registrationLink} href={'https://social-network.samuraijs.com/signUp'}
-                   target={'_blank'}>Redirect to registration</a>
+                   rel={"noopener noreferrer"} target={'_blank'}>Redirect to registration</a>
             </div>
 
 
             <div className={s.siteInfo}>
                 <div className={s.authorInfo}>This app is made by Oleksandr Khalevkyi who learn React and wants to work
                     on it in the future.
-                    There is a remote server to work with data - <a href={'https://social-network.samuraijs.com'}
-                                                                    target={'_blank'}>https://social-network.samuraijs.com/</a>
+                    There is a remote server to work with data -
+                    <a href={'https://social-network.samuraijs.com'}
+                       rel={"noopener noreferrer"}
+                       target={'_blank'}>https://social-network.samuraijs.com/</a>
                 </div>
                 <div className={s.contactsTitle}>
                     <div className={s.contacts}>
                         <div className={s.gitHub}><b className={s.contactName}>GitHub:</b> <a
                             href={'https://github.com/DenireS'}
+                            rel={"noopener noreferrer"}
                             target={'_blank'}>https://github.com/DenireS</a>
                         </div>
                         <div className={s.gmail}><b className={s.contactName}>Gmail:</b> everlastingmad@gmail.com
