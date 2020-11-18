@@ -35,7 +35,7 @@ export const Dialogs: React.FC<PropsType> = React.memo((props) => {
     return (
         <div className={s.dialogs}>
             <div className={classNames(s.dialogsItem, s[itemToggle])}>{dialogsElements}</div>
-            <div onClick={toggleItems} className={s[itemToggleIcon]}></div>
+            <div onClick={toggleItems} className={s[itemToggleIcon]}/>
             <DialogChat users={users} {...props} />
         </div>
     );

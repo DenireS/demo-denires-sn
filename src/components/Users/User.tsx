@@ -38,7 +38,7 @@ let User: React.FC<PropsType> = React.memo(({
 
                 <div>
                     <NavLink to={'/profile/' + user.id}>
-                        <img
+                        <img alt={''}
                             src={user.photos.small != null ? user.photos.small : userPhoto}
                             className={s.userPhoto}
                         />

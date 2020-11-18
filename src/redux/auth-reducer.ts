@@ -3,7 +3,6 @@ import {FormAction, stopSubmit} from 'redux-form';
 import {AuthAPI} from "../api/auth-api";
 import {SecurityAPI} from "../api/security-api";
 import {BaseThunkType, InferActionsTypes} from "./redux-store";
-import {getUserProfile} from "./profile-reducer";
 
 let initialState = {
     userId: null as number | null,

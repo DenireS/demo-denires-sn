@@ -45,9 +45,9 @@ export const Message: React.FC<PropsType> = React.memo((props) => {
 
             <div className={classNames(s.message, s[fullMessage])}>
 
-                {props.id == undefined ? <span className={s.splitDate}>{props.message}</span>
+                {props.id === undefined ? <span className={s.splitDate}>{props.message}</span>
                     :
-                    props.senderId == props.authUserId
+                    props.senderId === props.authUserId
                         ? <div className={s.messageSend}>
 
                             <div className={classNames(s.messageBody, s.send)}>
@@ -57,7 +57,7 @@ export const Message: React.FC<PropsType> = React.memo((props) => {
                                     <div className={s.utils}>
                                         <span className={classNames(s.messageTime, s.send)}>{time}</span>
 
-                                        {props.viewed == false ?
+                                        {props.viewed === false ?
                                             <span className={s.check}/>
                                             : <span className={classNames(s.check, s.viewed)}/>
                                         }
@@ -67,7 +67,7 @@ export const Message: React.FC<PropsType> = React.memo((props) => {
 
 
                             </div>
-                            {fullMessage == 'messageSelected' ? <div>
+                            {fullMessage === 'messageSelected' ? <div>
                                     <button className={s.deleteBtn}
                                             onClick={() => hideDeleteMessage(props.id)}>Delete
                                     </button>
@@ -91,7 +91,7 @@ export const Message: React.FC<PropsType> = React.memo((props) => {
 
                             </span>
 
-                            {fullMessage == 'messageSelected' ? <div>
+                            {fullMessage === 'messageSelected' ? <div>
                                     <button className={classNames(s.deleteBtn, s.btnReceived)}
                                             onClick={() => hideDeleteMessage(props.id)}>Delete
                                     </button>

@@ -59,7 +59,7 @@ export const Profile: React.FC<PropsType> = React.memo(({isOwner}) => {
         <div className={s.profilePage}>
             <div className={s.profileShape}>
                 <div className={s.profileShapeInfo}>
-                    <img src={profile.photos.large || userPhoto} className={s.mainPhoto}/>
+                    <img alt={''} src={profile.photos.large || userPhoto} className={s.mainPhoto}/>
                     {isOwner &&
                     <label className={s.buttonUpload}><input type={'file'} onChange={onMainPhotoSelected}/> Upload
                         image</label>}
@@ -159,7 +159,7 @@ const Contact: React.FC<ContactsPropsType> = ({contactTitle, contactValue}) => {
         <div>
             {lenght as number > 1 ?
                 <div className={s.contact}><b className={s.dataTitle}>{contactTitle}</b>
-                    <a href={contactValue} target="_blank">{contactValue}</a>
+                    <a href={contactValue} rel="noopener noreferrer" target="_blank">{contactValue}</a>
                 </div> : null}
         </div>
     )

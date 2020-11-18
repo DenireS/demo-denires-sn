@@ -40,33 +40,32 @@ const Navbar = () => {
             <nav className={classNames(s.nav, s[navbar])}>
                 <div className={s.item}>
                     <NavLink to="/profile" activeClassName={s.activeLink}>
-                        <div className={s.itemImg}><img src={home}/></div>
+                        <div className={s.itemImg}><img alt={''} src={home}/></div>
                         <div className={s.itemInfo}>Profile</div>
 
                     </NavLink>
                 </div>
                 <div className={s.item}>
                     <NavLink to="/dialogs" activeClassName={s.activeLink}>
-                        <div className={s.itemImg}><img src={messages}/></div>
+                        <div className={s.itemImg}><img alt={''} src={messages}/></div>
                         <div className={s.itemInfo}>Messages</div>
                     </NavLink>
                 </div>
                 <div className={s.item}>
                     <NavLink to="/users" activeClassName={s.activeLink}>
-                        <div className={s.itemImg}><img src={users}/></div>
+                        <div className={s.itemImg}><img alt={''} src={users}/></div>
                         <div className={s.itemInfo}>Users</div>
                     </NavLink>
                 </div>
                 <div className={s.item}>
                     {!isAuth ? <NavLink to="/login" activeClassName={s.activeLink}>
-                            <div className={s.itemImg}><img src={login}/></div>
+                            <div className={s.itemImg}><img alt={''} src={login}/></div>
                             <div className={s.itemInfo}>Login</div>
                         </NavLink>
                         : <NavLink onClick={() => logoutUser()} to="/login">
-                            <div className={s.itemImg}><img src={login}/></div>
+                            <div className={s.itemImg}><img alt={''} src={login}/></div>
                             <div className={s.itemInfo}>Logout</div>
                         </NavLink>}
-
                 </div>
 
             </nav>

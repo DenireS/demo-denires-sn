@@ -29,13 +29,13 @@ export const DialogItem: React.FC<PropsType> = React.memo((props) => {
     return (
         <NavLink to={'/dialogs/' + props.id} activeClassName={s.activeLink}>
             {props.hasNewMessages ? <div className={classNames(s.dialog, s.unread)}>
-                <NavLink to={'/profile/' + props.id}><img className={s.dialogImg} src={props.img}/></NavLink>
+                <NavLink to={'/profile/' + props.id}><img className={s.dialogImg} alt={''} src={props.img}/></NavLink>
                 <div className={s.dialogInfo} onClick={() => selectDialog(props.id)}>
                     <div className={s.dialogName}>{props.name}</div>
                     <div className={s.newMessagesCount}>New messages: {props.newMessagesCount}</div>
                 </div>
             </div> : <div className={s.dialog}>
-                <NavLink to={'/profile/' + props.id}><img className={s.dialogImg} src={props.img}/></NavLink>
+                <NavLink to={'/profile/' + props.id}><img className={s.dialogImg} alt={''} src={props.img}/></NavLink>
                 <div className={s.dialogInfo} onClick={() => selectDialog(props.id)}>
                     <div className={s.dialogName}>{props.name}</div>
                     <div className={s.lastDialogActivityDate}>Last dialog activity: {lastDialogActivityDate}</div>

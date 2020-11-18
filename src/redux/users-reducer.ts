@@ -1,7 +1,6 @@
 import {updateObjectinArray} from "../utils/object-helpers";
 import {UsersType} from "../types/types";
-import {ThunkAction} from "redux-thunk";
-import {AppStateType, BaseThunkType, InferActionsTypes} from "./redux-store";
+import {BaseThunkType, InferActionsTypes} from "./redux-store";
 import {Dispatch} from "redux";
 import {UsersAPI} from "../api/users-api";
 import {ResponseResultCodesEnum} from "../api/api";
@@ -55,7 +54,7 @@ const usersReducer = (state = initialState, action: ActionsTypes): InitialStateT
                 ...state,
                 followingInProgress: action.isFetching
                     ? [...state.followingInProgress, action.userId]
-                    : state.followingInProgress.filter((id) => id != action.userId),
+                    : state.followingInProgress.filter((id) => id !== action.userId),
             };
         }
         default:

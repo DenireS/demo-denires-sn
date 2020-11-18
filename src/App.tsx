@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {HashRouter, Redirect, Route, Switch, withRouter} from 'react-router-dom';
+import {HashRouter, Redirect, Route, Switch} from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import {Users} from './components/Users/Users';
@@ -11,7 +11,7 @@ import {initializeApp} from './redux/app-reducer';
 import {Preloader} from './components/common/Preloader/Preloader';
 import store from "./redux/redux-store";
 import {getInitialized} from "./redux/app-selectors";
-import { NotFoundPage } from './components/common/NotFoundPage/NotFoundPage';
+import {NotFoundPage} from './components/common/NotFoundPage/NotFoundPage';
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 
@@ -56,7 +56,7 @@ const App = () => {
     )
 }
 
-export const MainSNApp: React.FC = () => {
+export const InitApp: React.FC = () => {
     return <HashRouter>
         <Provider store={store}>
             <App/>
