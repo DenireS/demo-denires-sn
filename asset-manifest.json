@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/demo-denires-sn/static/css/main.2f1f3660.chunk.css",
-    "main.js": "/demo-denires-sn/static/js/main.3aa76c7e.chunk.js",
-    "main.js.map": "/demo-denires-sn/static/js/main.3aa76c7e.chunk.js.map",
+    "main.js": "/demo-denires-sn/static/js/main.feffdf13.chunk.js",
+    "main.js.map": "/demo-denires-sn/static/js/main.feffdf13.chunk.js.map",
     "runtime-main.js": "/demo-denires-sn/static/js/runtime-main.2da08905.js",
     "runtime-main.js.map": "/demo-denires-sn/static/js/runtime-main.2da08905.js.map",
     "static/css/2.ecffae5e.chunk.css": "/demo-denires-sn/static/css/2.ecffae5e.chunk.css",
-    "static/js/2.d7e5a02e.chunk.js": "/demo-denires-sn/static/js/2.d7e5a02e.chunk.js",
-    "static/js/2.d7e5a02e.chunk.js.map": "/demo-denires-sn/static/js/2.d7e5a02e.chunk.js.map",
+    "static/js/2.13b6bd45.chunk.js": "/demo-denires-sn/static/js/2.13b6bd45.chunk.js",
+    "static/js/2.13b6bd45.chunk.js.map": "/demo-denires-sn/static/js/2.13b6bd45.chunk.js.map",
     "index.html": "/demo-denires-sn/index.html",
-    "precache-manifest.21a7c55593493f4d0a16655c24940e3d.js": "/demo-denires-sn/precache-manifest.21a7c55593493f4d0a16655c24940e3d.js",
+    "precache-manifest.31b4cf2252417a4f18b74fa49425a163.js": "/demo-denires-sn/precache-manifest.31b4cf2252417a4f18b74fa49425a163.js",
     "service-worker.js": "/demo-denires-sn/service-worker.js",
     "static/css/2.ecffae5e.chunk.css.map": "/demo-denires-sn/static/css/2.ecffae5e.chunk.css.map",
     "static/css/main.2f1f3660.chunk.css.map": "/demo-denires-sn/static/css/main.2f1f3660.chunk.css.map",
-    "static/js/2.d7e5a02e.chunk.js.LICENSE.txt": "/demo-denires-sn/static/js/2.d7e5a02e.chunk.js.LICENSE.txt",
+    "static/js/2.13b6bd45.chunk.js.LICENSE.txt": "/demo-denires-sn/static/js/2.13b6bd45.chunk.js.LICENSE.txt",
     "static/media/SadSmile.png": "/demo-denires-sn/static/media/SadSmile.772a8269.png",
     "static/media/User.jpg": "/demo-denires-sn/static/media/User.1897f975.jpg",
     "static/media/heart.png": "/demo-denires-sn/static/media/heart.ff6e6871.png",
@@ -23,8 +23,8 @@
   "entrypoints": [
     "static/js/runtime-main.2da08905.js",
     "static/css/2.ecffae5e.chunk.css",
-    "static/js/2.d7e5a02e.chunk.js",
+    "static/js/2.13b6bd45.chunk.js",
     "static/css/main.2f1f3660.chunk.css",
-    "static/js/main.3aa76c7e.chunk.js"
+    "static/js/main.feffdf13.chunk.js"
   ]
 }
